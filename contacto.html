@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contacto | PasoSeguro</title>
+<meta name="description" content="Contáctanos para consultas sobre movilidad vial, transporte público o seguridad vial en Colombia.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#2c3e50">
+<link rel="canonical" href="https://pasoseguro.lat/contacto.html">
+<link rel="icon" href="img/favicon.ico" type="image/x-icon">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --tierra:#2c3e50;--tierra-claro:#34495e;--verde:#27ae60;--verde-suave:#2ecc71;
+  --arena:#f9f9f9;--blanco:#fff;--texto:#333;--texto-suave:#7f8c8d;--borde:#e8e8e8;
+  --sombra:0 4px 20px rgba(44,62,80,0.06);--sombra-hover:0 12px 40px rgba(44,62,80,0.12);
+  --radio:16px;--radio-sm:10px;--max:1140px;
+  --trans:0.3s ease;--fuente:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,sans-serif;
+}
+body{font-family:var(--fuente);color:var(--texto);background:var(--blanco);line-height:1.75;font-size:16px;}
+.contenedor{width:100%;max-width:var(--max);margin:0 auto;padding:0 24px;}
+.cabecera{position:sticky;top:0;background:rgba(255,255,255,0.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(44,62,80,0.06);z-index:1000;}
+.barra-nav{display:flex;align-items:center;justify-content:space-between;padding:13px 24px;max-width:var(--max);margin:0 auto;}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.15rem;color:var(--tierra);text-decoration:none;}
+.logo:hover{text-decoration:none;}
+.logo-icono{width:40px;height:40px;background:var(--verde);color:#fff;border-radius:11px;display:grid;place-items:center;font-size:1.1rem;}
+.menu{display:flex;gap:2px;list-style:none;margin:0;padding:0;align-items:center;}
+.menu a{color:var(--texto);padding:8px 14px;border-radius:var(--radio-sm);font-size:0.88rem;font-weight:600;transition:all var(--trans);text-decoration:none;}
+.menu a:hover{background:var(--arena);color:var(--verde);}
+.menu a.activo{color:var(--verde);}
+.boton-menu{display:none;background:none;border:2px solid var(--borde);border-radius:var(--radio-sm);padding:7px 11px;cursor:pointer;font-size:1.2rem;color:var(--tierra);}
+.seccion{padding:76px 0;}
+.seccion-contacto{padding-top:120px;padding-bottom:60px;}
+.seccion-encabezado{max-width:740px;margin-bottom:40px;}
+.etiqueta-seccion{display:inline-block;background:rgba(39,174,96,0.1);color:var(--verde);font-weight:700;font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;padding:6px 16px;border-radius:50px;margin-bottom:14px;border:1px solid rgba(39,174,96,0.15);}
+.seccion-encabezado h1{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800;color:var(--tierra);margin-bottom:10px;}
+.contacto-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;max-width:960px;margin:0 auto;}
+.contacto-info h3{font-size:1.15rem;color:var(--tierra);margin:24px 0 6px;}
+.contacto-info h3:first-child{margin-top:0;}
+.contacto-info a{color:var(--verde);font-weight:600;font-size:1.15rem;text-decoration:none;}
+.contacto-info a:hover{text-decoration:underline;}
+.emergencia{font-size:1.5rem;font-weight:800;color:#e67e22;}
+.form-card{background:var(--arena);padding:32px;border-radius:var(--radio);border:1px solid var(--borde);box-shadow:var(--sombra);}
+.form-card h3{font-size:1.15rem;color:var(--tierra);margin-bottom:16px;}
+.form-card form{display:flex;flex-direction:column;gap:16px;}
+.form-card label{font-weight:600;display:block;margin-bottom:4px;color:var(--tierra);font-size:0.92rem;}
+.form-card input,.form-card textarea{width:100%;padding:12px 16px;border:1px solid var(--borde);border-radius:var(--radio-sm);font-size:1rem;font-family:var(--fuente);background:#fff;transition:border-color var(--trans),box-shadow var(--trans);}
+.form-card input:focus,.form-card textarea:focus{outline:none;border-color:var(--verde);box-shadow:0 0 0 3px rgba(39,174,96,0.15);}
+.form-card textarea{resize:vertical;min-height:110px;}
+.boton{display:inline-block;padding:14px 32px;border-radius:50px;font-weight:700;font-size:0.97rem;border:none;cursor:pointer;transition:all var(--trans);text-decoration:none;font-family:var(--fuente);}
+.boton.primario{background:var(--verde);color:#fff;box-shadow:0 6px 22px rgba(39,174,96,0.35);}
+.boton.primario:hover{background:var(--verde-suave);transform:translateY(-3px);box-shadow:0 10px 34px rgba(39,174,96,0.45);}
+.aviso-form{display:none;margin-top:14px;padding:12px 16px;border-radius:var(--radio-sm);font-size:0.9rem;}
+.aviso-form.ok{display:block;background:#f0faf4;border-left:4px solid var(--verde);color:var(--tierra);}
+.pie{background:var(--tierra);color:rgba(255,255,255,0.85);padding:56px 0 26px;}
+.pie a{color:#fff;transition:opacity var(--trans);}
+.pie a:hover{opacity:0.7;text-decoration:none;}
+.pie-rejilla{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:30px;margin-bottom:30px;}
+.pie h4{color:#fff;margin-bottom:12px;}
+.pie p{color:rgba(255,255,255,0.7);}
+.pie ul{list-style:none;padding:0;}
+.pie ul li{margin-bottom:5px;}
+.pie-legal{border-top:1px solid rgba(255,255,255,0.1);padding-top:22px;font-size:0.83rem;text-align:center;color:rgba(255,255,255,0.5);}
+.pie-legal a{color:rgba(255,255,255,0.7);margin:0 7px;}
+@media (max-width:860px){
+  .boton-menu{display:block;}
+  .menu{position:absolute;top:66px;left:0;right:0;flex-direction:column;align-items:stretch;background:#fff;border-bottom:1px solid var(--borde);padding:10px 18px;display:none;box-shadow:var(--sombra-hover);}
+  .menu.abierto{display:flex;}
+  .menu a{padding:11px 14px;}
+  .contacto-grid{grid-template-columns:1fr;gap:32px;}
+}
+</style>
+</head>
+<body>
+
+<header class="cabecera">
+  <nav class="barra-nav" aria-label="Navegación principal">
+    <a href="index.html" class="logo"><span class="logo-icono">🛡️</span><span>PasoSeguro</span></a>
+    <button class="boton-menu" id="botonMenu" aria-label="Abrir menú" aria-expanded="false">☰</button>
+    <ul class="menu" id="menu">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="index.html#movilidad">Movilidad</a></li>
+      <li><a href="index.html#transporte">Transporte</a></li>
+      <li><a href="index.html#seguridad">Seguridad</a></li>
+      <li><a href="index.html#glosario">Glosario</a></li>
+      <li><a href="index.html#faq">Preguntas</a></li>
+      <li><a href="contacto.html" class="activo">Contacto</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section class="seccion seccion-contacto">
+    <div class="contenedor">
+      <div class="seccion-encabezado">
+        <span class="etiqueta-seccion">Contacto</span>
+        <h1>¿Tienes alguna pregunta?</h1>
+        <p>Estamos aquí para ayudarte con consultas sobre movilidad vial, transporte público o seguridad vial. Escríbenos y te responderemos lo antes posible.</p>
+      </div>
+
+      <div class="contacto-grid">
+        <div class="contacto-info">
+          <h3>📧 Correo electrónico</h3>
+          <p><a href="mailto:contacto@pasoseguro.lat">contacto@pasoseguro.lat</a></p>
+          <p style="margin-top:8px;">Respondemos en un plazo máximo de 48 horas hábiles.</p>
+
+          <h3>📞 Emergencias</h3>
+          <p><strong class="emergencia">123</strong> — Línea única de emergencias en Colombia.</p>
+
+          <h3>💡 Sugerencias</h3>
+          <p>¿Ves un error o crees que falta algún tema? Cuéntanoslo. PasoSeguro crece con tu ayuda.</p>
+
+          <h3>📌 Sobre el proyecto</h3>
+          <p>PasoSeguro es una guía educativa <strong>100% gratuita y sin ánimo de lucro</strong>. No vendemos productos ni servicios.</p>
+        </div>
+
+        <div class="form-card">
+          <h3>Formulario de contacto</h3>
+          <form id="form-contacto" action="#" method="POST" novalidate>
+            <div>
+              <label for="nombre">Nombre</label>
+              <input type="text" id="nombre" name="nombre" required autocomplete="name">
+            </div>
+            <div>
+              <label for="email">Correo electrónico</label>
+              <input type="email" id="email" name="email" required autocomplete="email">
+            </div>
+            <div>
+              <label for="asunto">Asunto</label>
+              <input type="text" id="asunto" name="asunto" required>
+            </div>
+            <div>
+              <label for="mensaje">Mensaje</label>
+              <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="boton primario" style="align-self:flex-start;">Enviar mensaje</button>
+            <div class="aviso-form" id="avisoForm">✅ ¡Gracias! Tu mensaje fue registrado. Te responderemos pronto.</div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="pie">
+  <div class="contenedor">
+    <div class="pie-rejilla">
+      <div><h4>🛡️ PasoSeguro</h4><p>Guía educativa y gratuita sobre movilidad vial, transporte público en Colombia y seguridad vial.</p></div>
+      <div><h4>Temas principales</h4><ul><li><a href="index.html#movilidad">Movilidad vial</a></li><li><a href="index.html#transporte">Transporte público</a></li><li><a href="index.html#seguridad">Seguridad vial</a></li><li><a href="index.html#glosario">Glosario</a></li></ul></div>
+      <div><h4>Información legal</h4><ul><li><a href="privacidad.html">Política de Privacidad</a></li><li><a href="politicas-cookies.html">Política de Cookies</a></li><li><a href="contacto.html">Contacto</a></li></ul></div>
+      <div><h4>Contacto</h4><ul><li>📧 <a href="mailto:contacto@pasoseguro.lat">contacto@pasoseguro.lat</a></li><li>📞 Emergencias: 123</li></ul></div>
+    </div>
+    <div class="pie-legal">
+      <p>© 2026 PasoSeguro — Todos los derechos reservados.</p>
+      <p><a href="privacidad.html">Privacidad</a> · <a href="politicas-cookies.html">Cookies</a> · <a href="contacto.html">Contacto</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var botonMenu=document.getElementById('botonMenu');
+  var menu=document.getElementById('menu');
+  if(botonMenu&&menu){
+    botonMenu.addEventListener('click',function(){
+      var abierto=menu.classList.toggle('abierto');
+      botonMenu.setAttribute('aria-expanded',abierto?'true':'false');
+    });
+    menu.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click',function(){
+        menu.classList.remove('abierto');
+        botonMenu.setAttribute('aria-expanded','false');
+      });
+    });
+  }
+
+  var form=document.getElementById('form-contacto');
+  var aviso=document.getElementById('avisoForm');
+  if(form){
+    form.addEventListener('submit',function(e){
+      e.preventDefault();
+      var nombre=document.getElementById('nombre').value.trim();
+      var email=document.getElementById('email').value.trim();
+      var asunto=document.getElementById('asunto').value.trim();
+      var mensaje=document.getElementById('mensaje').value.trim();
+      if(!nombre||!email||!asunto||!mensaje){
+        alert('Por favor completa todos los campos.');
+        return;
+      }
+      aviso.classList.add('ok');
+      form.reset();
+      setTimeout(function(){aviso.classList.remove('ok');},6000);
+    });
+  }
+})();
+</script>
+</body>
+</html>

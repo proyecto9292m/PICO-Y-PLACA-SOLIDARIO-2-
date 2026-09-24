@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Política de Cookies | PasoSeguro</title>
+<meta name="description" content="Política de Cookies de PasoSeguro. Conoce qué cookies usamos y cómo gestionarlas.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#2c3e50">
+<link rel="canonical" href="https://pasoseguro.lat/politicas-cookies.html">
+<link rel="icon" href="img/favicon.ico" type="image/x-icon">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --tierra:#2c3e50;--tierra-claro:#34495e;--verde:#27ae60;--verde-suave:#2ecc71;
+  --arena:#f9f9f9;--blanco:#fff;--texto:#333;--texto-suave:#7f8c8d;--borde:#e8e8e8;
+  --sombra-hover:0 12px 40px rgba(44,62,80,0.12);--radio:16px;--radio-sm:10px;--max:1140px;
+  --trans:0.3s ease;--fuente:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,sans-serif;
+}
+body{font-family:var(--fuente);color:var(--texto);background:var(--blanco);line-height:1.75;font-size:16px;}
+.contenedor{width:100%;max-width:var(--max);margin:0 auto;padding:0 24px;}
+.cabecera{position:sticky;top:0;background:rgba(255,255,255,0.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(44,62,80,0.06);z-index:1000;}
+.barra-nav{display:flex;align-items:center;justify-content:space-between;padding:13px 24px;max-width:var(--max);margin:0 auto;}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.15rem;color:var(--tierra);text-decoration:none;}
+.logo:hover{text-decoration:none;}
+.logo-icono{width:40px;height:40px;background:var(--verde);color:#fff;border-radius:11px;display:grid;place-items:center;font-size:1.1rem;}
+.menu{display:flex;gap:2px;list-style:none;margin:0;padding:0;align-items:center;}
+.menu a{color:var(--texto);padding:8px 14px;border-radius:var(--radio-sm);font-size:0.88rem;font-weight:600;transition:all var(--trans);text-decoration:none;}
+.menu a:hover{background:var(--arena);color:var(--verde);}
+.menu a.activo{color:var(--verde);}
+.boton-menu{display:none;background:none;border:2px solid var(--borde);border-radius:var(--radio-sm);padding:7px 11px;cursor:pointer;font-size:1.2rem;color:var(--tierra);}
+.seccion{padding:76px 0;}
+.seccion-legal{padding-top:120px;padding-bottom:60px;}
+.legal-wrap{max-width:820px;margin:0 auto;}
+.legal-wrap h1{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800;color:var(--tierra);margin-bottom:8px;}
+.legal-wrap h2{font-size:1.25rem;font-weight:700;color:var(--tierra);margin:32px 0 10px;}
+.legal-wrap h3{font-size:1.05rem;font-weight:700;color:var(--tierra-claro);margin:20px 0 8px;}
+.legal-wrap p{margin:0 0 1rem;}
+.legal-wrap ul{margin:0 0 1rem 1.2rem;}
+.legal-wrap ul li{margin-bottom:6px;}
+.legal-wrap a{color:var(--verde);font-weight:600;}
+.legal-wrap a:hover{text-decoration:underline;}
+.fecha{color:var(--texto-suave);font-size:0.9rem;margin-bottom:28px;}
+.legal-aviso{background:#f0faf4;border-left:5px solid var(--verde);padding:18px 22px;border-radius:var(--radio-sm);margin:24px 0;}
+table.cookies{width:100%;border-collapse:collapse;margin:16px 0;font-size:0.92rem;}
+table.cookies th,table.cookies td{border:1px solid var(--borde);padding:10px 12px;text-align:left;}
+table.cookies th{background:var(--arena);font-weight:700;color:var(--tierra);}
+.pie{background:var(--tierra);color:rgba(255,255,255,0.85);padding:56px 0 26px;}
+.pie a{color:#fff;transition:opacity var(--trans);}
+.pie a:hover{opacity:0.7;text-decoration:none;}
+.pie-rejilla{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:30px;margin-bottom:30px;}
+.pie h4{color:#fff;margin-bottom:12px;}
+.pie p{color:rgba(255,255,255,0.7);}
+.pie ul{list-style:none;padding:0;}
+.pie ul li{margin-bottom:5px;}
+.pie-legal{border-top:1px solid rgba(255,255,255,0.1);padding-top:22px;font-size:0.83rem;text-align:center;color:rgba(255,255,255,0.5);}
+.pie-legal a{color:rgba(255,255,255,0.7);margin:0 7px;}
+@media (max-width:860px){
+  .boton-menu{display:block;}
+  .menu{position:absolute;top:66px;left:0;right:0;flex-direction:column;align-items:stretch;background:#fff;border-bottom:1px solid var(--borde);padding:10px 18px;display:none;box-shadow:var(--sombra-hover);}
+  .menu.abierto{display:flex;}
+  .menu a{padding:11px 14px;}
+}
+</style>
+</head>
+<body>
+
+<header class="cabecera">
+  <nav class="barra-nav" aria-label="Navegación principal">
+    <a href="index.html" class="logo"><span class="logo-icono">🛡️</span><span>PasoSeguro</span></a>
+    <button class="boton-menu" id="botonMenu" aria-label="Abrir menú" aria-expanded="false">☰</button>
+    <ul class="menu" id="menu">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="index.html#movilidad">Movilidad</a></li>
+      <li><a href="index.html#transporte">Transporte</a></li>
+      <li><a href="index.html#seguridad">Seguridad</a></li>
+      <li><a href="index.html#glosario">Glosario</a></li>
+      <li><a href="index.html#faq">Preguntas</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section class="seccion seccion-legal">
+    <div class="contenedor">
+      <div class="legal-wrap">
+        <h1>Política de Cookies</h1>
+        <p class="fecha">Última actualización: 4 de agosto de 2026</p>
+
+        <div class="legal-aviso">
+          <strong>Resumen rápido:</strong> usamos cookies esenciales siempre, y cookies de análisis y publicidad <strong>solo si las aceptas</strong>. Puedes cambiar tu elección cuando quieras.
+        </div>
+
+        <h2>1. ¿Qué son las cookies?</h2>
+        <p>Las cookies son pequeños archivos que el sitio guarda en tu navegador para recordar información sobre tu visita. También usamos tecnologías similares como <em>localStorage</em>.</p>
+
+        <h2>2. Tipos de cookies que utilizamos</h2>
+
+        <h3>2.1 Esenciales</h3>
+        <p>Necesarias para el funcionamiento básico del sitio. No recopilan información personal identificable.</p>
+
+        <h3>2.2 Preferencias locales (localStorage)</h3>
+        <p>Guardamos en tu navegador, sin enviarlos a servidores:</p>
+        <ul>
+          <li>Tu elección sobre el banner de cookies.</li>
+          <li>El progreso en contenidos interactivos, si los hubiera.</li>
+        </ul>
+
+        <h3>2.3 Análisis (Google Analytics)</h3>
+        <p>Métricas agregadas y anónimas sobre visitas, páginas más leídas y dispositivos.</p>
+
+        <h3>2.4 Publicidad (Google Ads)</h3>
+        <p>Solo si aceptas: Google puede mostrarte anuncios personalizados según tu navegación previa. Si las rechazas, los anuncios seguirán apareciendo, pero no personalizados.</p>
+
+        <h2>3. Detalle de cookies utilizadas</h2>
+        <table class="cookies">
+          <thead><tr><th>Nombre</th><th>Tipo</th><th>Finalidad</th><th>Duración</th></tr></thead>
+          <tbody>
+            <tr><td>cookie_consent</td><td>Esencial</td><td>Recordar tu elección sobre cookies</td><td>1 año</td></tr>
+            <tr><td>_ga</td><td>Análisis</td><td>Distinguir usuarios en Google Analytics</td><td>2 años</td></tr>
+            <tr><td>_gid</td><td>Análisis</td><td>Distinguir usuarios en Google Analytics</td><td>24 horas</td></tr>
+            <tr><td>_gads</td><td>Publicidad</td><td>Personalización de anuncios Google Ads</td><td>13 meses</td></tr>
+            <tr><td>localStorage</td><td>Local</td><td>Estado del banner y progreso</td><td>Hasta borrarlo</td></tr>
+          </tbody>
+        </table>
+
+        <h2>4. Cómo gestionar tus cookies</h2>
+        <ul>
+          <li><strong>Banner de cookies:</strong> acepta o rechaza al entrar al sitio.</li>
+          <li><strong>Navegador:</strong> bloquea o elimina cookies desde la configuración.</li>
+          <li><strong>Google:</strong> gestiona anuncios en <a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer">adssettings.google.com</a>.</li>
+        </ul>
+
+        <h2>5. Cambios en esta política</h2>
+        <p>Podemos actualizarla ocasionalmente. La fecha siempre aparecerá al inicio del documento.</p>
+
+        <h2>6. Contacto</h2>
+        <p>Escríbenos a <a href="mailto:contacto@pasoseguro.lat">contacto@pasoseguro.lat</a>.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="pie">
+  <div class="contenedor">
+    <div class="pie-rejilla">
+      <div><h4>🛡️ PasoSeguro</h4><p>Guía educativa y gratuita sobre movilidad vial, transporte público en Colombia y seguridad vial.</p></div>
+      <div><h4>Temas principales</h4><ul><li><a href="index.html#movilidad">Movilidad vial</a></li><li><a href="index.html#transporte">Transporte público</a></li><li><a href="index.html#seguridad">Seguridad vial</a></li><li><a href="index.html#glosario">Glosario</a></li></ul></div>
+      <div><h4>Información legal</h4><ul><li><a href="privacidad.html">Política de Privacidad</a></li><li><a href="politicas-cookies.html">Política de Cookies</a></li><li><a href="contacto.html">Contacto</a></li></ul></div>
+      <div><h4>Contacto</h4><ul><li>📧 <a href="mailto:contacto@pasoseguro.lat">contacto@pasoseguro.lat</a></li><li>📞 Emergencias: 123</li></ul></div>
+    </div>
+    <div class="pie-legal">
+      <p>© 2026 PasoSeguro — Todos los derechos reservados.</p>
+      <p><a href="privacidad.html">Privacidad</a> · <a href="politicas-cookies.html">Cookies</a> · <a href="contacto.html">Contacto</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var botonMenu=document.getElementById('botonMenu');
+  var menu=document.getElementById('menu');
+  if(botonMenu&&menu){
+    botonMenu.addEventListener('click',function(){
+      var abierto=menu.classList.toggle('abierto');
+      botonMenu.setAttribute('aria-expanded',abierto?'true':'false');
+    });
+    menu.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click',function(){
+        menu.classList.remove('abierto');
+        botonMenu.setAttribute('aria-expanded','false');
+      });
+    });
+  }
+})();
+</script>
+</body>
+</html>
