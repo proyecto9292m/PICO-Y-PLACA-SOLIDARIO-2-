@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PasoSeguro | Guía de movilidad y seguridad vial en Colombia</title>
 <meta name="description" content="PasoSeguro es una guía educativa gratuita sobre movilidad, transporte público y seguridad vial en Colombia. Contenido claro, sin fines de lucro.">
-<meta name="keywords" content="sucursal virtual personas">
+<meta name="keywords" content="movilidad vial, seguridad vial, transporte público, educación vial, Colombia, paso seguro">
 <meta name="author" content="PasoSeguro">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#2c3e50">
@@ -653,7 +653,8 @@ p{ margin:0 0 1rem; color:var(--texto); }
               <dt style="font-weight:800; color:var(--tierra); font-size:1.05rem;">Peatón</dt>
               <dd style="margin:0; color:var(--texto);">Persona que se desplaza a pie por la vía.</dd>
             </div>
-            <div style="background:#fff; border:1px solid var(--borde); border-left:5px solid var(--verde); border-radius:var(--radio-sm); padding:<dt style="font-weight:800; color:var(--tierra); font-size:1.05rem;">Siniestro vial</dt>
+            <div style="background:#fff; border:1px solid var(--borde); border-left:5px solid var(--verde); border-radius:var(--radio-sm); padding:16px 20px;">
+                            <dt style="font-weight:800; color:var(--tierra); font-size:1.05rem;">Siniestro vial</dt>
               <dd style="margin:0; color:var(--texto);">Suceso en la vía que causa daños, lesiones o muertes. Se prefiere este término a "accidente".</dd>
             </div>
             <div style="background:#fff; border:1px solid var(--borde); border-left:5px solid var(--verde); border-radius:var(--radio-sm); padding:16px 20px;">
@@ -811,7 +812,7 @@ p{ margin:0 0 1rem; color:var(--texto); }
   </script>
 
   <!-- ============================================================
-  JAVASCRIPT - COOKIES Y MENÚ (SIN REDIRECCIONES)
+  JAVASCRIPT - COOKIES (SIEMPRE VISIBLE) Y MENÚ (SIN REDIRECCIONES)
   ============================================================ -->
   <script>
     (function () {
@@ -829,12 +830,13 @@ p{ margin:0 0 1rem; color:var(--texto); }
         return;
       }
 
-      // Mostrar banner al cargar
+      // Mostrar banner SIEMPRE al cargar (no se lee localStorage)
       overlay.classList.add('visible');
       banner.classList.add('visible');
       document.body.classList.add('cookie-locked');
+      contenidoPrincipal.classList.remove('visible');
 
-      // Muestra el contenido y oculta el banner (sin redirección)
+      // Muestra el contenido y oculta el banner (solo en esta visita)
       function mostrarContenido() {
         overlay.classList.remove('visible');
         banner.classList.remove('visible');
@@ -842,25 +844,14 @@ p{ margin:0 0 1rem; color:var(--texto); }
         contenidoPrincipal.classList.add('visible');
       }
 
-      // Guarda la preferencia y muestra el contenido
-      function handleCookieAction(aceptadas) {
+      // Acción de los botones: solo ocultan el banner en esta visita.
+      // NO se guarda nada, por lo que al recargar el banner vuelve a salir.
+      function handleCookieAction() {
         mostrarContenido();
-        try {
-          localStorage.setItem('pasoseguro_cookies', aceptadas ? 'aceptadas' : 'rechazadas');
-        } catch (e) {}
       }
 
-      // Eventos de los botones
-      btnAceptar.addEventListener('click', function () { handleCookieAction(true); });
-      btnRechazar.addEventListener('click', function () { handleCookieAction(false); });
-
-      // Si ya eligió antes, mostrar directamente el contenido
-      try {
-        var pref = localStorage.getItem('pasoseguro_cookies');
-        if (pref === 'aceptadas' || pref === 'rechazadas') {
-          mostrarContenido();
-        }
-      } catch (e) {}
+      btnAceptar.addEventListener('click', handleCookieAction);
+      btnRechazar.addEventListener('click', handleCookieAction);
 
       // ----- MENÚ MÓVIL -----
       var botonMenu = document.getElementById('botonMenu');
