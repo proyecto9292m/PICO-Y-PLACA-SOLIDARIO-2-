@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PasoSeguro | Guía de movilidad y seguridad vial en Colombia</title>
-<meta name="description" content="Guía educativa gratuita sobre movilidad, transporte público y seguridad vial en Colombia. Contenido claro, sin fines de lucro.">
-<meta name="keywords" content="movilidad vial, seguridad vial, transporte público, educación vial, Colombia">
+<meta name="description" content="PasoSeguro es una guía educativa gratuita sobre movilidad, transporte público y seguridad vial en Colombia. Contenido claro, sin fines de lucro.">
+<meta name="keywords" content="sucursal virtual personas">
 <meta name="author" content="PasoSeguro">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#2c3e50">
@@ -25,11 +25,11 @@
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
-gtag('config', 'AW-18254896446');
 gtag('consent', 'default', {
   'ad_storage': 'denied',
   'analytics_storage': 'denied'
 });
+gtag('config', 'AW-18254896446');
 </script>
 
 <style>
@@ -53,6 +53,7 @@ gtag('consent', 'default', {
   --max:1140px;
   --trans:0.3s ease;
   --fuente:'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+  --amarillo:#FDDA24;
 }
 
 body{
@@ -64,7 +65,102 @@ body{
   -webkit-font-smoothing:antialiased;
 }
 
+body.cookie-locked{ overflow:hidden; }
+
 .contenedor{ width:100%; max-width:var(--max); margin:0 auto; padding:0 24px; }
+
+/* ===== COOKIES ===== */
+.cookie-overlay{
+  position:fixed; inset:0;
+  background:rgba(44,62,80,0.45);
+  z-index:9998;
+  backdrop-filter:blur(4px);
+  display:none;
+}
+.cookie-overlay.visible{ display:block; }
+
+.cookie-banner{
+  position:fixed; inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  z-index:9999;
+}
+.cookie-banner.visible{ display:flex; }
+
+.cookie-modal{
+  background:#ffffff;
+  max-width:540px;
+  width:100%;
+  padding:48px 40px;
+  border-radius:var(--radio);
+  box-shadow:0 24px 64px rgba(44,62,80,0.25);
+  text-align:center;
+  border-top:6px solid var(--tierra);
+  animation:cookieAnim 0.5s ease;
+}
+@keyframes cookieAnim{
+  from{ transform:scale(0.9) translateY(20px); opacity:0; }
+  to{ transform:scale(1) translateY(0); opacity:1; }
+}
+.cookie-modal h2{
+  font-size:1.6rem;
+  margin-bottom:12px;
+  color:var(--tierra);
+  font-weight:800;
+}
+.cookie-modal p{
+  font-size:0.95rem;
+  color:var(--texto-suave);
+  margin-bottom:28px;
+  line-height:1.7;
+}
+.cookie-actions{
+  display:flex;
+  gap:14px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+.cookie-actions .boton-cookie{
+  padding:14px 36px;
+  border:none;
+  border-radius:50px;
+  font-weight:800;
+  font-size:0.95rem;
+  cursor:pointer;
+  transition:all var(--trans);
+  min-width:150px;
+  font-family:var(--fuente);
+  background:var(--amarillo);
+  color:var(--tierra);
+  box-shadow:0 4px 16px rgba(253,218,36,0.45);
+}
+.cookie-actions .boton-cookie:hover{
+  transform:translateY(-3px);
+  box-shadow:0 8px 28px rgba(253,218,36,0.65);
+}
+.cookie-enlaces{
+  margin-top:20px;
+  font-size:0.82rem;
+  color:var(--texto-suave);
+}
+.cookie-enlaces a{
+  color:var(--tierra);
+  font-weight:600;
+  text-decoration:none;
+}
+.cookie-enlaces a:hover{ text-decoration:underline; }
+
+.contenido-principal{ display:none; }
+.contenido-principal.visible{
+  display:block;
+  animation:fadeIn 0.6s ease;
+}
+@keyframes fadeIn{
+  from{ opacity:0; transform:translateY(20px); }
+  to{ opacity:1; transform:translateY(0); }
+}
 
 /* ===== HEADER ===== */
 .cabecera{
@@ -349,317 +445,441 @@ p{ margin:0 0 1rem; color:var(--texto); }
   .menu a{ padding:11px 14px; }
   .hero{ padding:76px 0 56px; }
   .seccion{ padding:52px 0; }
+  .cookie-modal{ padding:36px 28px; margin:16px; }
+  .cookie-actions .boton-cookie{ min-width:130px; padding:12px 28px; font-size:0.9rem; }
 }
 @media (max-width:480px){
   .rejilla-2,.rejilla-3,.rejilla-4{ grid-template-columns:1fr; }
   .hero-insignias{ gap:7px; }
   .insignia{ font-size:0.72rem; padding:5px 13px; }
+  .cookie-modal{ padding:28px 20px; }
+  .cookie-actions{ flex-direction:column; }
+  .cookie-actions .boton-cookie{ width:100%; min-width:unset; }
 }
 </style>
 </head>
-<body>
+<body class="cookie-locked">
 
-<div class="contenido-principal" id="contenidoPrincipal">
+  <!-- ============================================================
+  COOKIES BANNER
+  ============================================================ -->
+  <div id="cookie-overlay" class="cookie-overlay visible"></div>
 
-  <header class="cabecera">
-    <nav class="barra-nav" aria-label="Navegación principal">
-      <a href="index.html" class="logo">
-        <span class="logo-icono">🛡️</span>
-        <span>PasoSeguro</span>
-      </a>
-      <button class="boton-menu" id="botonMenu" aria-label="Abrir menú" aria-expanded="false">☰</button>
-      <ul class="menu" id="menu">
-        <li><a href="index.html" class="activo">Inicio</a></li>
-        <li><a href="#movilidad">Movilidad</a></li>
-        <li><a href="#transporte">Transporte</a></li>
-        <li><a href="#seguridad">Seguridad</a></li>
-        <li><a href="#glosario">Glosario</a></li>
-        <li><a href="#faq">Preguntas</a></li>
-        <li><a href="contacto.html">Contacto</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <div class="franja-valores">📚 Guía 100% gratuita · Sin pagos · Sin donaciones · Contenido de libre acceso</div>
-
-  <main>
-    <section class="hero" id="inicio">
-      <div class="contenedor">
-        <h1>Aprende a moverte con seguridad y conciencia por Colombia</h1>
-        <p class="subtitulo">Una guía educativa y profesional sobre movilidad, transporte público y seguridad vial. Clara, directa y para todas las personas.</p>
-        <div class="hero-botones">
-          <a href="#movilidad" class="boton primario">Comenzar a aprender</a>
-          <a href="#indice" class="boton secundario">Ver todos los temas</a>
-        </div>
-        <div class="hero-insignias">
-          <span class="insignia">🚌 Transporte público</span>
-          <span class="insignia">🚸 Seguridad vial</span>
-          <span class="insignia">🚲 Movilidad sostenible</span>
-          <span class="insignia">🆓 Acceso libre</span>
-        </div>
+  <div id="aviso-cookies" class="cookie-banner visible" role="dialog" aria-modal="true" aria-labelledby="cookie-titulo">
+    <div class="cookie-modal">
+      <h2 id="cookie-titulo">Aviso de cookies</h2>
+      <p>
+        Utilizamos cookies técnicas para mejorar tu experiencia de navegación.
+        No usamos cookies publicitarias ni de seguimiento personalizado.
+        <br><br>
+        Puedes aceptar o rechazar las cookies no esenciales en cualquier momento.
+      </p>
+      <div class="cookie-actions">
+        <button class="boton-cookie" id="btn-rechazar-cookies" type="button">Rechazar</button>
+        <button class="boton-cookie" id="btn-aceptar-cookies" type="button">Aceptar cookies</button>
       </div>
-    </section>
-
-    <section class="seccion" id="sobre">
-      <div class="contenedor">
-        <div class="seccion-encabezado">
-          <span class="etiqueta-seccion">Sección 1 · Sobre esta guía</span>
-          <h2>Un proyecto educativo, transparente y para la comunidad</h2>
-          <p>Antes de empezar, queremos ser claros contigo sobre qué es PasoSeguro y qué no es.</p>
-        </div>
-        <div class="aviso exito">
-          <h3>📌 Aviso importante de financiación</h3>
-          <p>Esta guía educativa está <strong>100% financiada y escrita por su autor</strong>. <strong>No se aceptan donaciones. No se procesan pagos. No se vende ningún producto ni servicio.</strong> Todo el contenido es de <strong>libre acceso</strong> y siempre lo será.</p>
-        </div>
-        <div class="rejilla rejilla-3">
-          <div class="tarjeta"><span class="icono">🎯</span><h3>Nuestro objetivo</h3><p>Reunir información clara y útil sobre movilidad vial, transporte público y seguridad en la vía.</p></div>
-          <div class="tarjeta"><span class="icono">🤝</span><h3>Para quién es</h3><p>Para cualquier persona: estudiantes, familias, nuevos usuarios del transporte público y conductores.</p></div>
-          <div class="tarjeta"><span class="icono">💚</span><h3>Sin ánimo de lucro</h3><p>No buscamos ganar dinero. Es una iniciativa personal de divulgación para aportar algo positivo.</p></div>
-        </div>
-        <div class="aviso info">
-          <h3>Aviso de contenido educativo</h3>
-          <p>La información de este sitio es de carácter <strong>educativo y orientativo</strong>. No reemplaza la normativa oficial de tránsito, la señalización en la vía ni las indicaciones de las autoridades competentes.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="seccion" id="indice" style="background:var(--arena);">
-      <div class="contenedor">
-        <div class="seccion-encabezado">
-          <span class="etiqueta-seccion">Sección 2 · Índice</span>
-          <h2>Todos los temas de la guía</h2>
-          <p>Puedes leerla de principio a fin o saltar directamente al tema que te interese.</p>
-        </div>
-        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:12px;">
-          <a href="#movilidad" style="display:flex; align-items:center; gap:12px; background:#fff; border:1px solid var(--borde); border-radius:var(--radio-sm); padding:12px 16px; font-weight:600; color:var(--texto); text-decoration:none;">¿Qué es la movilidad vial?</a>
-          <a href="#sostenible" style="display:flex; align-items:center; gap:12px; background:#fff; border:1px solid var(--borde); border-radius:var(--radio-sm); padding:12px 16px; font-weight:600; color:var(--texto); text-decoration:none;">Movilidad sostenible</a>
-          <a href="#transporte" style="display:flex; align-items:center; gap:12px; background:#fff; border:1px solid var(--borde); border-radius:var(--radio-sm); padding:12px 16px; font-weight:600; color:var(--texto); text-decoration:none;">Transporte público</a>
-          <a href="#glosario" style="display:flex; align-items:center; gap:12px; background:#fff; border:1px solid var(--borde); border-radius:var(--radio-sm); padding:12px 16px; font-weight:600; color:var(--texto); text-decoration:none;">Glosario interactivo</a>
-          <a href="#seguridad" style="display:flex; align-items:center; gap:12px; background:#fff; border:1px solid var(--borde); border-radius:var(--radio-sm); padding:12px 16px; font-weight:600; color:var(--texto); text-decoration:none;">Seguridad vial</a>
-          <a href="#faq" style="display:flex; align-items:center; gap:12px; background:#fff; border:1px solid var(--borde); border-radius:var(--radio-sm); padding:12px 16px; font-weight:600; color:var(--texto); text-decoration:none;">Preguntas frecuentes</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="seccion" id="movilidad">
-      <div class="contenedor">
-        <div class="seccion-encabezado">
-          <span class="etiqueta-seccion">Sección 3 · Conceptos</span>
-          <h2>¿Qué es la movilidad vial?</h2>
-        </div>
-        <p>La <strong>movilidad vial</strong> es la capacidad de las personas y los bienes para desplazarse de un lugar a otro dentro de un territorio, utilizando las vías y los distintos medios de transporte disponibles. No se trata solo de los carros: incluye caminar, montar en bicicleta, usar el transporte público, conducir una moto o un automóvil y mover mercancías.</p>
-        <p>Cuando hablamos de movilidad, no pensamos únicamente en "ir rápido", sino en moverse de forma <strong>segura, eficiente, sostenible y accesible para todas las personas</strong>.</p>
-        <h3>Los elementos de la movilidad</h3>
-        <div class="rejilla rejilla-4">
-          <div class="tarjeta"><span class="icono">🚶</span><h3>Las personas</h3><p>Quienes se desplazan: peatones, pasajeros, ciclistas y conductores.</p></div>
-          <div class="tarjeta"><span class="icono">🛣️</span><h3>La infraestructura</h3><p>Vías, andenes, ciclorrutas, paraderos, semáforos y señalización.</p></div>
-          <div class="tarjeta"><span class="icono">🚌</span><h3>Los vehículos</h3><p>Buses, autos, motos, bicicletas, patinetes y vehículos de carga.</p></div>
-          <div class="tarjeta"><span class="icono">📋</span><h3>Las normas</h3><p>Reglas de tránsito que ordenan la circulación y protegen a todos.</p></div>
-        </div>
-        <h3>¿Por qué deberías conocer sobre movilidad?</h3>
-        <ul style="list-style:none; padding:0;">
-          <li style="display:flex; gap:12px; align-items:flex-start; margin-bottom:10px;">✔ Porque todos los días te desplazas y tomar buenas decisiones te ahorra tiempo y dinero.</li>
-          <li style="display:flex; gap:12px; align-items:flex-start; margin-bottom:10px;">✔ Porque entender las normas te ayuda a cuidar tu vida y la de los demás.</li>
-          <li style="display:flex; gap:12px; align-items:flex-start; margin-bottom:10px;">✔ Porque una ciudadanía informada exige y construye mejores ciudades.</li>
-          <li style="display:flex; gap:12px; align-items:flex-start; margin-bottom:10px;">✔ Porque la movilidad afecta el medio ambiente, la salud y la economía de todos.</li>
-        </ul>
-      </div>
-    </section>
-
-    <section class="seccion" id="sostenible" style="background:var(--arena);">
-      <div class="contenedor">
-        <div class="seccion-encabezado">
-          <span class="etiqueta-seccion">Sección 4 · Sostenibilidad</span>
-          <h2>La movilidad sostenible y sus pilares</h2>
-          <p>Movernos sin comprometer la salud del planeta ni la de las próximas generaciones.</p>
-        </div>
-        <p>La <strong>movilidad sostenible</strong> busca satisfacer nuestras necesidades de desplazamiento reduciendo al máximo los impactos negativos: contaminación del aire, ruido, siniestros y consumo de energía.</p>
-        <h3>Beneficios de una movilidad más sostenible</h3>
-        <div class="rejilla rejilla-3">
-          <div class="tarjeta"><span class="icono">🌳</span><h3>Aire más limpio</h3><p>Menos emisiones de gases contaminantes.</p></div>
-          <div class="tarjeta"><span class="icono">❤️</span><h3>Mejor salud</h3><p>Caminar y pedalear previene enfermedades.</p></div>
-          <div class="tarjeta"><span class="icono">💰</span><h3>Ahorro</h3><p>El transporte público es más económico que el carro.</p></div>
-          <div class="tarjeta"><span class="icono">⏱️</span><h3>Menos trancones</h3><p>Más personas en menos vehículos significa calles más fluidas.</p></div>
-          <div class="tarjeta"><span class="icono">🔇</span><h3>Menos ruido</h3><p>Ciudades más tranquilas y agradables.</p></div>
-          <div class="tarjeta"><span class="icono">🤝</span><h3>Más equidad</h3><p>Garantiza que todas las personas puedan moverse.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="seccion" id="transporte">
-      <div class="contenedor">
-        <div class="seccion-encabezado">
-          <span class="etiqueta-seccion">Sección 5 · Transporte público</span>
-          <h2>¿Cómo funciona el transporte público en Colombia?</h2>
-          <p>Un panorama general antes de entrar en cada sistema y ciudad.</p>
-        </div>
-        <p>El transporte público en Colombia es el conjunto de servicios que permiten que las personas se desplacen pagando un pasaje, en vehículos compartidos operados de forma organizada. Es la columna vertebral de la movilidad en las ciudades.</p>
-        <h3>Tipos de transporte público</h3>
-        <div class="rejilla rejilla-2">
-          <div class="tarjeta"><span class="icono">🚇</span><h3>Transporte masivo</h3><p>Sistemas de gran capacidad: metros y sistemas tipo BRT con carriles exclusivos.</p></div>
-          <div class="tarjeta"><span class="icono">🚌</span><h3>Transporte colectivo</h3><p>Buses y busetas que circulan por rutas urbanas en calles compartidas.</p></div>
-          <div class="tarjeta"><span class="icono">🚕</span><h3>Transporte individual</h3><p>Taxis y servicios autorizados de puerta a puerta.</p></div>
-          <div class="tarjeta"><span class="icono">🚐</span><h3>Transporte intermunicipal</h3><p>Buses que conectan ciudades y municipios desde terminales.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="seccion" id="glosario" style="background:var(--arena);">
-      <div class="contenedor">
-        <div class="seccion-encabezado">
-          <span class="etiqueta-seccion">Sección 6 · Glosario</span>
-          <h2>Glosario de movilidad</h2>
-          <p>Los términos más importantes para entender la movilidad vial.</p>
-        </div>
-        <div style="display:grid; gap:12px;">
-          <div style="background:#fff; border:1px solid var(--borde); border-left:5px solid var(--verde); border-radius:var(--radio-sm); padding:16px 20px;">
-            <dt style="font-weight:800; color:var(--tierra); font-size:1.05rem;">Actor vial</dt>
-            <dd style="margin:0; color:var(--texto);">Toda persona que interactúa en la vía: peatones, ciclistas, motociclistas, conductores y pasajeros.</dd>
-          </div>
-          <div style="background:#fff; border:1px solid var(--borde); border-left:5px solid var(--verde); border-radius:var(--radio-sm); padding:16px 20px;">
-            <dt style="font-weight:800; color:var(--tierra); font-size:1.05rem;">BRT</dt>
-            <dd style="margin:0; color:var(--texto);">Bus Rapid Transit: sistema de buses de alta capacidad que circulan por carriles exclusivos.</dd>
-          </div>
-          <div style="background:#fff; border:1px solid var(--borde); border-left:5px solid var(--verde); border-radius:var(--radio-sm); padding:16px 20px;">
-            <dt style="font-weight:800; color:var(--tierra); font-size:1.05rem;">Peatón</dt>
-            <dd style="margin:0; color:var(--texto);">Persona que se desplaza a pie por la vía.</dd>
-          </div>
-          <div style="background:#fff; border:1px solid var(--borde); border-left:5px solid var(--verde); border-radius:var(--radio-sm); padding:16px 20px;">
-            <dt style="font-weight:800; color:var(--tierra); font-size:1.05rem;">Siniestro vial</dt>
-            <dd style="margin:0; color:var(--texto);">Suceso en la vía que causa daños, lesiones o muertes. Se prefiere este término a "accidente".</dd>
-          </div>
-          <div style="background:#fff; border:1px solid var(--borde); border-left:5px solid var(--verde); border-radius:var(--radio-sm); padding:16px 20px;">
-            <dt style="font-weight:800; color:var(--tierra); font-size:1.05rem;">SOAT</dt>
-            <dd style="margin:0; color:var(--texto);">Seguro Obligatorio de Accidentes de Tránsito, que cubre atención a víctimas.</dd>
-          </div>
-          <div style="background:#fff; border:1px solid var(--borde); border-left:5px solid var(--verde); border-radius:var(--radio-sm); padding:16px 20px;">
-            <dt style="font-weight:800; color:var(--tierra); font-size:1.05rem;">Transbordo</dt>
-            <dd style="margin:0; color:var(--texto);">Cambio de una ruta o modo de transporte a otro dentro de un mismo viaje.</dd>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="seccion" id="seguridad">
-      <div class="contenedor">
-        <div class="seccion-encabezado">
-          <span class="etiqueta-seccion">Sección 7 · Seguridad</span>
-          <h2>¿Qué es la seguridad vial?</h2>
-        </div>
-        <p>La <strong>seguridad vial</strong> es el conjunto de acciones, normas y comportamientos orientados a <strong>prevenir los siniestros de tránsito y reducir sus consecuencias</strong>.</p>
-        <p>Hoy se habla de la <strong>visión de cero muertes</strong> en las vías: la idea de que ninguna persona debería morir o quedar gravemente herida al desplazarse.</p>
-        <div class="aviso peligro">
-          <h3>¿Por qué decimos "siniestro" y no "accidente"?</h3>
-          <p>La palabra "accidente" sugiere algo inevitable o producto del azar. La mayoría de los hechos de tránsito son <strong>prevenibles</strong>: tienen causas como el exceso de velocidad, el alcohol o la distracción.</p>
-        </div>
-        <h3>Los pilares de la seguridad vial</h3>
-        <div class="rejilla rejilla-3">
-          <div class="tarjeta"><span class="icono">🧠</span><h3>Comportamiento</h3><p>Educación y cultura vial.</p></div>
-          <div class="tarjeta"><span class="icono">🛣️</span><h3>Vías seguras</h3><p>Infraestructura que perdona errores.</p></div>
-          <div class="tarjeta"><span class="icono">🚗</span><h3>Vehículos seguros</h3><p>Vehículos en buen estado.</p></div>
-          <div class="tarjeta"><span class="icono">🚑</span><h3>Atención oportuna</h3><p>Respuesta rápida tras un siniestro.</p></div>
-          <div class="tarjeta"><span class="icono">📜</span><h3>Gestión y normas</h3><p>Leyes que ordenan el sistema.</p></div>
-          <div class="tarjeta"><span class="icono">📊</span><h3>Datos y prevención</h3><p>Estudiar para evitar siniestros.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="seccion" id="faq" style="background:var(--arena);">
-      <div class="contenedor">
-        <div class="seccion-encabezado">
-          <span class="etiqueta-seccion">Preguntas frecuentes</span>
-          <h2>Preguntas frecuentes</h2>
-        </div>
-        <div style="border-radius:var(--radio); overflow:hidden;">
-          <div style="border:1px solid var(--borde); border-radius:var(--radio-sm); margin-bottom:12px; background:#fff; overflow:hidden;">
-            <button style="width:100%; text-align:left; background:#fff; border:none; padding:18px 24px; font-size:1rem; font-weight:700; color:var(--tierra); cursor:pointer; font-family:var(--fuente);" onclick="this.nextElementSibling.style.maxHeight = this.nextElementSibling.style.maxHeight ? null : this.nextElementSibling.scrollHeight + 'px'; this.classList.toggle('activo');">
-              ¿Esta página cobra por su contenido? <span style="float:right; font-size:1.4rem;">+</span>
-            </button>
-            <div style="max-height:0; overflow:hidden; transition:max-height 0.35s ease;">
-              <div style="padding:0 24px 20px;"><p>No. PasoSeguro es <strong>100% gratuita</strong>. No se procesan pagos, no se aceptan donaciones y todo el contenido es de libre acceso.</p></div>
-            </div>
-          </div>
-          <div style="border:1px solid var(--borde); border-radius:var(--radio-sm); margin-bottom:12px; background:#fff; overflow:hidden;">
-            <button style="width:100%; text-align:left; background:#fff; border:none; padding:18px 24px; font-size:1rem; font-weight:700; color:var(--tierra); cursor:pointer; font-family:var(--fuente);" onclick="this.nextElementSibling.style.maxHeight = this.nextElementSibling.style.maxHeight ? null : this.nextElementSibling.scrollHeight + 'px'; this.classList.toggle('activo');">
-              ¿Quién financia este sitio? <span style="float:right; font-size:1.4rem;">+</span>
-            </button>
-            <div style="max-height:0; overflow:hidden; transition:max-height 0.35s ease;">
-              <div style="padding:0 24px 20px;"><p>Esta guía está <strong>financiada y escrita en su totalidad por su autor</strong>, como un aporte educativo a la comunidad, sin ánimo de lucro.</p></div>
-            </div>
-          </div>
-          <div style="border:1px solid var(--borde); border-radius:var(--radio-sm); margin-bottom:12px; background:#fff; overflow:hidden;">
-            <button style="width:100%; text-align:left; background:#fff; border:none; padding:18px 24px; font-size:1rem; font-weight:700; color:var(--tierra); cursor:pointer; font-family:var(--fuente);" onclick="this.nextElementSibling.style.maxHeight = this.nextElementSibling.style.maxHeight ? null : this.nextElementSibling.scrollHeight + 'px'; this.classList.toggle('activo');">
-              ¿La información reemplaza la normativa oficial? <span style="float:right; font-size:1.4rem;">+</span>
-            </button>
-            <div style="max-height:0; overflow:hidden; transition:max-height 0.35s ease;">
-              <div style="padding:0 24px 20px;"><p>No. El contenido es educativo y orientativo. La norma oficial en Colombia es el Código Nacional de Tránsito.</p></div>
-            </div>
-          </div>
-          <div style="border:1px solid var(--borde); border-radius:var(--radio-sm); margin-bottom:12px; background:#fff; overflow:hidden;">
-            <button style="width:100%; text-align:left; background:#fff; border:none; padding:18px 24px; font-size:1rem; font-weight:700; color:var(--tierra); cursor:pointer; font-family:var(--fuente);" onclick="this.nextElementSibling.style.maxHeight = this.nextElementSibling.style.maxHeight ? null : this.nextElementSibling.scrollHeight + 'px'; this.classList.toggle('activo');">
-              ¿Usan cookies? <span style="float:right; font-size:1.4rem;">+</span>
-            </button>
-            <div style="max-height:0; overflow:hidden; transition:max-height 0.35s ease;">
-              <div style="padding:0 24px 20px;"><p>Usamos cookies para mejorar tu experiencia. Puedes aceptarlas o rechazarlas en el banner.</p></div>
-            </div>
-          </div>
-        </div>
-        <div class="aviso exito" style="margin-top:30px;">
-          <h3>¿Te resultó útil esta guía?</h3>
-          <p>Compártela con tu familia, tus amigos o tu comunidad. Difundir educación vial también salva vidas. Recuerda: es completamente gratis y de libre acceso.</p>
-          <a href="contacto.html" class="boton primario" style="margin-top:8px; display:inline-block;">Escríbenos tu opinión</a>
-        </div>
-      </div>
-    </section>
-
-    <section style="background:var(--tierra); color:#eafff7; padding:56px 0; text-align:center;">
-      <div class="contenedor" style="max-width:820px; margin:0 auto;">
-        <h2 style="color:#fff;">Compromiso de transparencia</h2>
-        <p style="font-size:1.1rem; color:rgba(255,255,255,0.85);">
-          <strong>PasoSeguro</strong> es una guía educativa <strong>100% financiada y escrita por su autor</strong>. No se aceptan donaciones, no se procesan pagos y no se vende ningún producto o servicio. Todo el contenido es de <strong>libre acceso</strong>.
-        </p>
-      </div>
-    </section>
-  </main>
-
-  <footer class="pie">
-    <div class="contenedor">
-      <div class="pie-rejilla">
-        <div><h4>🛡️ PasoSeguro</h4><p>Guía educativa y gratuita sobre movilidad vial, transporte público en Colombia y seguridad vial.</p></div>
-        <div><h4>Temas principales</h4><ul><li><a href="#movilidad">Movilidad vial</a></li><li><a href="#transporte">Transporte público</a></li><li><a href="#seguridad">Seguridad vial</a></li><li><a href="#glosario">Glosario</a></li></ul></div>
-        <div><h4>Información legal</h4><ul><li><a href="privacidad.html">Política de Privacidad</a></li><li><a href="politicas-cookies.html">Política de Cookies</a></li><li><a href="contacto.html">Contacto</a></li></ul></div>
-        <div><h4>Contacto</h4><ul><li>📧 <a href="mailto:contacto@pasoseguro.lat">contacto@pasoseguro.lat</a></li><li>📞 Emergencias: 123</li></ul></div>
-      </div>
-      <div class="pie-legal">
-        <p>© 2026 PasoSeguro — Todos los derechos reservados.</p>
-        <p><a href="privacidad.html">Privacidad</a> · <a href="politicas-cookies.html">Cookies</a> · <a href="contacto.html">Contacto</a></p>
+      <div class="cookie-enlaces">
+        <a href="#politica-privacidad">Política de Privacidad</a> ·
+        <a href="#politica-cookies">Política de Cookies</a>
       </div>
     </div>
-  </footer>
-</div>
+  </div>
 
-<script>
-(function () {
-  'use strict';
+  <!-- ============================================================
+  CONTENIDO PRINCIPAL
+  ============================================================ -->
+  <div class="contenido-principal" id="contenidoPrincipal">
 
-  // ----- MENÚ MÓVIL -----
-  var botonMenu = document.getElementById('botonMenu');
-  var menu = document.getElementById('menu');
+    <header class="cabecera">
+      <nav class="barra-nav" aria-label="Navegación principal">
+        <a href="index.html" class="logo">
+          <span class="logo-icono">🛡️</span>
+          <span>PasoSeguro</span>
+        </a>
+        <button class="boton-menu" id="botonMenu" aria-label="Abrir menú" aria-expanded="false">☰</button>
+        <ul class="menu" id="menu">
+          <li><a href="index.html" class="activo">Inicio</a></li>
+          <li><a href="#movilidad">Movilidad</a></li>
+          <li><a href="#transporte">Transporte</a></li>
+          <li><a href="#seguridad">Seguridad</a></li>
+          <li><a href="#glosario">Glosario</a></li>
+          <li><a href="#faq">Preguntas</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+    </header>
 
-  if (botonMenu && menu) {
-    botonMenu.addEventListener('click', function () {
-      var abierto = menu.classList.toggle('abierto');
-      botonMenu.setAttribute('aria-expanded', abierto ? 'true' : 'false');
-    });
+    <div class="franja-valores">📚 Guía 100% gratuita · Sin pagos · Sin donaciones · Contenido de libre acceso</div>
 
-    menu.querySelectorAll('a').forEach(function (enlace) {
-      enlace.addEventListener('click', function () {
-        menu.classList.remove('abierto');
-        botonMenu.setAttribute('aria-expanded', 'false');
-      });
-    });
+    <main>
+      <section class="hero" id="inicio">
+        <div class="contenedor">
+          <h1>PasoSeguro: aprende a moverte con seguridad y conciencia por Colombia</h1>
+          <p class="subtitulo">Una guía educativa y profesional sobre movilidad, transporte público y seguridad vial. Clara, directa y para todas las personas.</p>
+          <div class="hero-botones">
+            <a href="#movilidad" class="boton primario">Comenzar a aprender</a>
+            <a href="#indice" class="boton secundario">Ver todos los temas</a>
+          </div>
+          <div class="hero-insignias">
+            <span class="insignia">🚌 Transporte público</span>
+            <span class="insignia">🚸 Seguridad vial</span>
+            <span class="insignia">🚲 Movilidad sostenible</span>
+            <span class="insignia">🆓 Acceso libre</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="seccion" id="sobre">
+        <div class="contenedor">
+          <div class="seccion-encabezado">
+            <span class="etiqueta-seccion">Sección 1 · Sobre esta guía</span>
+            <h2>Un proyecto educativo, transparente y para la comunidad</h2>
+            <p>Antes de empezar, queremos ser claros contigo sobre qué es PasoSeguro y qué no es.</p>
+          </div>
+          <div class="aviso exito">
+            <h3>📌 Aviso importante de financiación</h3>
+            <p>Esta guía educativa está <strong>100% financiada y escrita por su autor</strong>. <strong>No se aceptan donaciones. No se procesan pagos. No se vende ningún producto ni servicio.</strong> Todo el contenido es de <strong>libre acceso</strong> y siempre lo será.</p>
+          </div>
+          <div class="rejilla rejilla-3">
+            <div class="tarjeta"><span class="icono">🎯</span><h3>Nuestro objetivo</h3><p>Reunir información clara y útil sobre movilidad vial, transporte público y seguridad en la vía.</p></div>
+            <div class="tarjeta"><span class="icono">🤝</span><h3>Para quién es</h3><p>Para cualquier persona: estudiantes, familias, nuevos usuarios del transporte público y conductores.</p></div>
+            <div class="tarjeta"><span class="icono">💚</span><h3>Sin ánimo de lucro</h3><p>No buscamos ganar dinero. Es una iniciativa personal de divulgación para aportar algo positivo.</p></div>
+          </div>
+          <div class="aviso info">
+            <h3>Aviso de contenido educativo</h3>
+            <p>La información de este sitio es de carácter <strong>educativo y orientativo</strong>. No reemplaza la normativa oficial de tránsito, la señalización en la vía ni las indicaciones de las autoridades competentes.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="seccion" id="indice" style="background:var(--arena);">
+        <div class="contenedor">
+          <div class="seccion-encabezado">
+            <span class="etiqueta-seccion">Sección 2 · Índice</span>
+            <h2>Todos los temas de la guía</h2>
+            <p>Puedes leerla de principio a fin o saltar directamente al tema que te interese.</p>
+          </div>
+          <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:12px;">
+            <a href="#movilidad" style="display:flex; align-items:center; gap:12px; background:#fff; border:1px solid var(--borde); border-radius:var(--radio-sm); padding:12px 16px; font-weight:600; color:var(--texto); text-decoration:none;">Qué es la movilidad vial</a>
+            <a href="#sostenible" style="display:flex; align-items:center; gap:12px; background:#fff; border:1px solid var(--borde); border-radius:var(--radio-sm); padding:12px 16px; font-weight:600; color:var(--texto); text-decoration:none;">Movilidad sostenible y sus pilares</a>
+            <a href="#transporte" style="display:flex; align-items:center; gap:12px; background:#fff; border:1px solid var(--borde); border-radius:var(--radio-sm); padding:12px 16px; font-weight:600; color:var(--texto); text-decoration:none;">Cómo funciona el transporte público</a>
+            <a href="#glosario" style="display:flex; align-items:center; gap:12px; background:#fff; border:1px solid var(--borde); border-radius:var(--radio-sm); padding:12px 16px; font-weight:600; color:var(--texto); text-decoration:none;">Glosario de términos viales</a>
+            <a href="#seguridad" style="display:flex; align-items:center; gap:12px; background:#fff; border:1px solid var(--borde); border-radius:var(--radio-sm); padding:12px 16px; font-weight:600; color:var(--texto); text-decoration:none;">Qué es la seguridad vial</a>
+            <a href="#faq" style="display:flex; align-items:center; gap:12px; background:#fff; border:1px solid var(--borde); border-radius:var(--radio-sm); padding:12px 16px; font-weight:600; color:var(--texto); text-decoration:none;">Preguntas frecuentes sobre movilidad</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="seccion" id="movilidad">
+        <div class="contenedor">
+          <div class="seccion-encabezado">
+            <span class="etiqueta-seccion">Sección 3 · Conceptos</span>
+            <h2>¿Qué es la movilidad vial?</h2>
+          </div>
+          <p>La <strong>movilidad vial</strong> es la capacidad de las personas y los bienes para desplazarse de un lugar a otro dentro de un territorio, utilizando las vías y los distintos medios de transporte disponibles. No se trata solo de los carros: incluye caminar, montar en bicicleta, usar el transporte público, conducir una moto o un automóvil y mover mercancías.</p>
+          <p>Cuando hablamos de movilidad, no pensamos únicamente en "ir rápido", sino en moverse de forma <strong>segura, eficiente, sostenible y accesible para todas las personas</strong>.</p>
+          <h3>Los elementos de la movilidad</h3>
+          <div class="rejilla rejilla-4">
+            <div class="tarjeta"><span class="icono">🚶</span><h3>Las personas</h3><p>Quienes se desplazan: peatones, pasajeros, ciclistas y conductores.</p></div>
+            <div class="tarjeta"><span class="icono">🛣️</span><h3>La infraestructura</h3><p>Vías, andenes, ciclorrutas, paraderos, semáforos y señalización.</p></div>
+            <div class="tarjeta"><span class="icono">🚌</span><h3>Los vehículos</h3><p>Buses, autos, motos, bicicletas, patinetes y vehículos de carga.</p></div>
+            <div class="tarjeta"><span class="icono">📋</span><h3>Las normas</h3><p>Reglas de tránsito que ordenan la circulación y protegen a todos.</p></div>
+          </div>
+          <h3>¿Por qué deberías conocer sobre movilidad?</h3>
+          <ul style="list-style:none; padding:0;">
+            <li style="display:flex; gap:12px; align-items:flex-start; margin-bottom:10px;">✔ Porque todos los días te desplazas y tomar buenas decisiones te ahorra tiempo y dinero.</li>
+            <li style="display:flex; gap:12px; align-items:flex-start; margin-bottom:10px;">✔ Porque entender las normas te ayuda a cuidar tu vida y la de los demás.</li>
+            <li style="display:flex; gap:12px; align-items:flex-start; margin-bottom:10px;">✔ Porque una ciudadanía informada exige y construye mejores ciudades.</li>
+            <li style="display:flex; gap:12px; align-items:flex-start; margin-bottom:10px;">✔ Porque la movilidad afecta el medio ambiente, la salud y la economía de todos.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="seccion" id="sostenible" style="background:var(--arena);">
+        <div class="contenedor">
+          <div class="seccion-encabezado">
+            <span class="etiqueta-seccion">Sección 4 · Sostenibilidad</span>
+            <h2>La movilidad sostenible y sus pilares</h2>
+            <p>Movernos sin comprometer la salud del planeta ni la de las próximas generaciones.</p>
+          </div>
+          <p>La <strong>movilidad sostenible</strong> busca satisfacer nuestras necesidades de desplazamiento reduciendo al máximo los impactos negativos: contaminación del aire, ruido, siniestros y consumo de energía.</p>
+          <h3>Beneficios de una movilidad más sostenible</h3>
+          <div class="rejilla rejilla-3">
+            <div class="tarjeta"><span class="icono">🌳</span><h3>Aire más limpio</h3><p>Menos emisiones de gases contaminantes.</p></div>
+            <div class="tarjeta"><span class="icono">❤️</span><h3>Mejor salud</h3><p>Caminar y pedalear previene enfermedades.</p></div>
+            <div class="tarjeta"><span class="icono">💰</span><h3>Ahorro</h3><p>El transporte público es más económico que el carro.</p></div>
+            <div class="tarjeta"><span class="icono">⏱️</span><h3>Menos trancones</h3><p>Más personas en menos vehículos significa calles más fluidas.</p></div>
+            <div class="tarjeta"><span class="icono">🔇</span><h3>Menos ruido</h3><p>Ciudades más tranquilas y agradables.</p></div>
+            <div class="tarjeta"><span class="icono">🤝</span><h3>Más equidad</h3><p>Garantiza que todas las personas puedan moverse.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="seccion" id="transporte">
+        <div class="contenedor">
+          <div class="seccion-encabezado">
+            <span class="etiqueta-seccion">Sección 5 · Transporte público</span>
+            <h2>¿Cómo funciona el transporte público en Colombia?</h2>
+            <p>Un panorama general antes de entrar en cada sistema y ciudad.</p>
+          </div>
+          <p>El transporte público en Colombia es el conjunto de servicios que permiten que las personas se desplacen pagando un pasaje, en vehículos compartidos operados de forma organizada. Es la columna vertebral de la movilidad en las ciudades.</p>
+          <h3>Tipos de transporte público</h3>
+          <div class="rejilla rejilla-2">
+            <div class="tarjeta"><span class="icono">🚇</span><h3>Transporte masivo</h3><p>Sistemas de gran capacidad: metros y sistemas tipo BRT con carriles exclusivos.</p></div>
+            <div class="tarjeta"><span class="icono">🚌</span><h3>Transporte colectivo</h3><p>Buses y busetas que circulan por rutas urbanas en calles compartidas.</p></div>
+            <div class="tarjeta"><span class="icono">🚕</span><h3>Transporte individual</h3><p>Taxis y servicios autorizados de puerta a puerta.</p></div>
+            <div class="tarjeta"><span class="icono">🚐</span><h3>Transporte intermunicipal</h3><p>Buses que conectan ciudades y municipios desde terminales.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="seccion" id="glosario" style="background:var(--arena);">
+        <div class="contenedor">
+          <div class="seccion-encabezado">
+            <span class="etiqueta-seccion">Sección 6 · Glosario</span>
+            <h2>Glosario de movilidad</h2>
+            <p>Los términos más importantes para entender la movilidad vial.</p>
+          </div>
+          <div style="display:grid; gap:12px;">
+            <div style="background:#fff; border:1px solid var(--borde); border-left:5px solid var(--verde); border-radius:var(--radio-sm); padding:16px 20px;">
+              <dt style="font-weight:800; color:var(--tierra); font-size:1.05rem;">Actor vial</dt>
+              <dd style="margin:0; color:var(--texto);">Toda persona que interactúa en la vía: peatones, ciclistas, motociclistas, conductores y pasajeros.</dd>
+            </div>
+            <div style="background:#fff; border:1px solid var(--borde); border-left:5px solid var(--verde); border-radius:var(--radio-sm); padding:16px 20px;">
+              <dt style="font-weight:800; color:var(--tierra); font-size:1.05rem;">BRT</dt>
+              <dd style="margin:0; color:var(--texto);">Bus Rapid Transit: sistema de buses de alta capacidad que circulan por carriles exclusivos.</dd>
+            </div>
+            <div style="background:#fff; border:1px solid var(--borde); border-left:5px solid var(--verde); border-radius:var(--radio-sm); padding:16px 20px;">
+              <dt style="font-weight:800; color:var(--tierra); font-size:1.05rem;">Peatón</dt>
+              <dd style="margin:0; color:var(--texto);">Persona que se desplaza a pie por la vía.</dd>
+            </div>
+            <div style="background:#fff; border:1px solid var(--borde); border-left:5px solid var(--verde); border-radius:var(--radio-sm); padding:<dt style="font-weight:800; color:var(--tierra); font-size:1.05rem;">Siniestro vial</dt>
+              <dd style="margin:0; color:var(--texto);">Suceso en la vía que causa daños, lesiones o muertes. Se prefiere este término a "accidente".</dd>
+            </div>
+            <div style="background:#fff; border:1px solid var(--borde); border-left:5px solid var(--verde); border-radius:var(--radio-sm); padding:16px 20px;">
+              <dt style="font-weight:800; color:var(--tierra); font-size:1.05rem;">SOAT</dt>
+              <dd style="margin:0; color:var(--texto);">Seguro Obligatorio de Accidentes de Tránsito, que cubre atención a víctimas.</dd>
+            </div>
+            <div style="background:#fff; border:1px solid var(--borde); border-left:5px solid var(--verde); border-radius:var(--radio-sm); padding:16px 20px;">
+              <dt style="font-weight:800; color:var(--tierra); font-size:1.05rem;">Transbordo</dt>
+              <dd style="margin:0; color:var(--texto);">Cambio de una ruta o modo de transporte a otro dentro de un mismo viaje.</dd>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="seccion" id="seguridad">
+        <div class="contenedor">
+          <div class="seccion-encabezado">
+            <span class="etiqueta-seccion">Sección 7 · Seguridad</span>
+            <h2>¿Qué es la seguridad vial?</h2>
+          </div>
+          <p>La <strong>seguridad vial</strong> es el conjunto de acciones, normas y comportamientos orientados a <strong>prevenir los siniestros de tránsito y reducir sus consecuencias</strong>.</p>
+          <p>Hoy se habla de la <strong>visión de cero muertes</strong> en las vías: la idea de que ninguna persona debería morir o quedar gravemente herida al desplazarse.</p>
+          <div class="aviso peligro">
+            <h3>¿Por qué decimos "siniestro" y no "accidente"?</h3>
+            <p>La palabra "accidente" sugiere algo inevitable o producto del azar. La mayoría de los hechos de tránsito son <strong>prevenibles</strong>: tienen causas como el exceso de velocidad, el alcohol o la distracción.</p>
+          </div>
+          <h3>Los pilares de la seguridad vial</h3>
+          <div class="rejilla rejilla-3">
+            <div class="tarjeta"><span class="icono">🧠</span><h3>Comportamiento</h3><p>Educación y cultura vial.</p></div>
+            <div class="tarjeta"><span class="icono">🛣️</span><h3>Vías seguras</h3><p>Infraestructura que perdona errores.</p></div>
+            <div class="tarjeta"><span class="icono">🚗</span><h3>Vehículos seguros</h3><p>Vehículos en buen estado.</p></div>
+            <div class="tarjeta"><span class="icono">🚑</span><h3>Atención oportuna</h3><p>Respuesta rápida tras un siniestro.</p></div>
+            <div class="tarjeta"><span class="icono">📜</span><h3>Gestión y normas</h3><p>Leyes que ordenan el sistema.</p></div>
+            <div class="tarjeta"><span class="icono">📊</span><h3>Datos y prevención</h3><p>Estudiar para evitar siniestros.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="seccion" id="faq" style="background:var(--arena);">
+        <div class="contenedor">
+          <div class="seccion-encabezado">
+            <span class="etiqueta-seccion">Preguntas frecuentes</span>
+            <h2>Preguntas frecuentes</h2>
+          </div>
+          <div style="border-radius:var(--radio); overflow:hidden;">
+            <div style="border:1px solid var(--borde); border-radius:var(--radio-sm); margin-bottom:12px; background:#fff; overflow:hidden;">
+              <button style="width:100%; text-align:left; background:#fff; border:none; padding:18px 24px; font-size:1rem; font-weight:700; color:var(--tierra); cursor:pointer; font-family:var(--fuente);" onclick="this.nextElementSibling.style.maxHeight = this.nextElementSibling.style.maxHeight ? null : this.nextElementSibling.scrollHeight + 'px'; this.classList.toggle('activo');">
+                ¿Esta página cobra por su contenido? <span style="float:right; font-size:1.4rem;">+</span>
+              </button>
+              <div style="max-height:0; overflow:hidden; transition:max-height 0.35s ease;">
+                <div style="padding:0 24px 20px;"><p>No. PasoSeguro es <strong>100% gratuita</strong>. No se procesan pagos, no se aceptan donaciones y todo el contenido es de libre acceso.</p></div>
+              </div>
+            </div>
+            <div style="border:1px solid var(--borde); border-radius:var(--radio-sm); margin-bottom:12px; background:#fff; overflow:hidden;">
+              <button style="width:100%; text-align:left; background:#fff; border:none; padding:18px 24px; font-size:1rem; font-weight:700; color:var(--tierra); cursor:pointer; font-family:var(--fuente);" onclick="this.nextElementSibling.style.maxHeight = this.nextElementSibling.style.maxHeight ? null : this.nextElementSibling.scrollHeight + 'px'; this.classList.toggle('activo');">
+                ¿Quién financia este sitio? <span style="float:right; font-size:1.4rem;">+</span>
+              </button>
+              <div style="max-height:0; overflow:hidden; transition:max-height 0.35s ease;">
+                <div style="padding:0 24px 20px;"><p>Esta guía está <strong>financiada y escrita en su totalidad por su autor</strong>, como un aporte educativo a la comunidad, sin ánimo de lucro.</p></div>
+              </div>
+            </div>
+            <div style="border:1px solid var(--borde); border-radius:var(--radio-sm); margin-bottom:12px; background:#fff; overflow:hidden;">
+              <button style="width:100%; text-align:left; background:#fff; border:none; padding:18px 24px; font-size:1rem; font-weight:700; color:var(--tierra); cursor:pointer; font-family:var(--fuente);" onclick="this.nextElementSibling.style.maxHeight = this.nextElementSibling.style.maxHeight ? null : this.nextElementSibling.scrollHeight + 'px'; this.classList.toggle('activo');">
+                ¿La información reemplaza la normativa oficial? <span style="float:right; font-size:1.4rem;">+</span>
+              </button>
+              <div style="max-height:0; overflow:hidden; transition:max-height 0.35s ease;">
+                <div style="padding:0 24px 20px;"><p>No. El contenido es educativo y orientativo. La norma oficial en Colombia es el Código Nacional de Tránsito.</p></div>
+              </div>
+            </div>
+            <div style="border:1px solid var(--borde); border-radius:var(--radio-sm); margin-bottom:12px; background:#fff; overflow:hidden;">
+              <button style="width:100%; text-align:left; background:#fff; border:none; padding:18px 24px; font-size:1rem; font-weight:700; color:var(--tierra); cursor:pointer; font-family:var(--fuente);" onclick="this.nextElementSibling.style.maxHeight = this.nextElementSibling.style.maxHeight ? null : this.nextElementSibling.scrollHeight + 'px'; this.classList.toggle('activo');">
+                ¿Usan cookies? <span style="float:right; font-size:1.4rem;">+</span>
+              </button>
+              <div style="max-height:0; overflow:hidden; transition:max-height 0.35s ease;">
+                <div style="padding:0 24px 20px;"><p>Usamos cookies técnicas para mejorar tu experiencia. Puedes aceptarlas o rechazarlas en el aviso inicial.</p></div>
+              </div>
+            </div>
+          </div>
+          <div class="aviso exito" style="margin-top:30px;">
+            <h3>¿Te resultó útil esta guía?</h3>
+            <p>Compártela con tu familia, tus amigos o tu comunidad. Difundir educación vial también salva vidas. Recuerda: es completamente gratis y de libre acceso.</p>
+            <a href="contacto.html" class="boton primario" style="margin-top:8px; display:inline-block;">Escríbenos tu opinión</a>
+          </div>
+        </div>
+      </section>
+
+      <section style="background:var(--tierra); color:#eafff7; padding:56px 0; text-align:center;">
+        <div class="contenedor" style="max-width:820px; margin:0 auto;">
+          <h2 style="color:#fff;">Compromiso de transparencia</h2>
+          <p style="font-size:1.1rem; color:rgba(255,255,255,0.85);">
+            <strong>PasoSeguro</strong> es una guía educativa <strong>100% financiada y escrita por su autor</strong>. No se aceptan donaciones, no se procesan pagos y no se vende ningún producto o servicio. Todo el contenido es de <strong>libre acceso</strong>.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="pie">
+      <div class="contenedor">
+        <div class="pie-rejilla">
+          <div><h4>🛡️ PasoSeguro</h4><p>Guía educativa y gratuita sobre movilidad vial, transporte público en Colombia y seguridad vial.</p></div>
+          <div><h4>Temas principales</h4><ul><li><a href="#movilidad">Movilidad vial</a></li><li><a href="#transporte">Transporte público</a></li><li><a href="#seguridad">Seguridad vial</a></li><li><a href="#glosario">Glosario</a></li></ul></div>
+          <div><h4>Información legal</h4><ul><li><a href="privacidad.html">Política de Privacidad</a></li><li><a href="politicas-cookies.html">Política de Cookies</a></li><li><a href="contacto.html">Contacto</a></li></ul></div>
+          <div><h4>Contacto</h4><ul><li>📧 <a href="mailto:contacto@pasoseguro.lat">contacto@pasoseguro.lat</a></li><li>📞 Emergencias: 123</li></ul></div>
+        </div>
+        <div class="pie-legal">
+          <p>© 2026 PasoSeguro — Todos los derechos reservados.</p>
+          <p><a href="privacidad.html">Privacidad</a> · <a href="politicas-cookies.html">Cookies</a> · <a href="contacto.html">Contacto</a></p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ============================================================
+  DATOS ESTRUCTURADOS (SEO)
+  ============================================================ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "¿Esta página cobra por su contenido?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. PasoSeguro es 100% gratuita. No se procesan pagos, no se aceptan donaciones y todo el contenido es de libre acceso."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Quién financia este sitio?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Esta guía está financiada y escrita en su totalidad por su autor, como un aporte educativo a la comunidad, sin ánimo de lucro."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿La información reemplaza la normativa oficial?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. El contenido es educativo y orientativo. La norma oficial en Colombia es el Código Nacional de Tránsito."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Usan cookies?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Usamos cookies técnicas para mejorar tu experiencia. Puedes aceptarlas o rechazarlas en el aviso inicial."
+        }
+      }
+    ]
   }
-})();
-</script>
+  </script>
+
+  <!-- ============================================================
+  JAVASCRIPT - COOKIES Y MENÚ (SIN REDIRECCIONES)
+  ============================================================ -->
+  <script>
+    (function () {
+      'use strict';
+
+      // ----- ELEMENTOS DEL BANNER -----
+      var overlay = document.getElementById('cookie-overlay');
+      var banner = document.getElementById('aviso-cookies');
+      var btnAceptar = document.getElementById('btn-aceptar-cookies');
+      var btnRechazar = document.getElementById('btn-rechazar-cookies');
+      var contenidoPrincipal = document.getElementById('contenidoPrincipal');
+
+      if (!overlay || !banner || !btnAceptar || !btnRechazar || !contenidoPrincipal) {
+        console.error('Error: Elementos del banner de cookies no encontrados');
+        return;
+      }
+
+      // Mostrar banner al cargar
+      overlay.classList.add('visible');
+      banner.classList.add('visible');
+      document.body.classList.add('cookie-locked');
+
+      // Muestra el contenido y oculta el banner (sin redirección)
+      function mostrarContenido() {
+        overlay.classList.remove('visible');
+        banner.classList.remove('visible');
+        document.body.classList.remove('cookie-locked');
+        contenidoPrincipal.classList.add('visible');
+      }
+
+      // Guarda la preferencia y muestra el contenido
+      function handleCookieAction(aceptadas) {
+        mostrarContenido();
+        try {
+          localStorage.setItem('pasoseguro_cookies', aceptadas ? 'aceptadas' : 'rechazadas');
+        } catch (e) {}
+      }
+
+      // Eventos de los botones
+      btnAceptar.addEventListener('click', function () { handleCookieAction(true); });
+      btnRechazar.addEventListener('click', function () { handleCookieAction(false); });
+
+      // Si ya eligió antes, mostrar directamente el contenido
+      try {
+        var pref = localStorage.getItem('pasoseguro_cookies');
+        if (pref === 'aceptadas' || pref === 'rechazadas') {
+          mostrarContenido();
+        }
+      } catch (e) {}
+
+      // ----- MENÚ MÓVIL -----
+      var botonMenu = document.getElementById('botonMenu');
+      var menu = document.getElementById('menu');
+
+      if (botonMenu && menu) {
+        botonMenu.addEventListener('click', function () {
+          var abierto = menu.classList.toggle('abierto');
+          botonMenu.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+        });
+
+        menu.querySelectorAll('a').forEach(function (enlace) {
+          enlace.addEventListener('click', function () {
+            menu.classList.remove('abierto');
+            botonMenu.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
