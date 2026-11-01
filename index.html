@@ -69,7 +69,7 @@ body.cookie-locked{ overflow:hidden; }
 
 .contenedor{ width:100%; max-width:var(--max); margin:0 auto; padding:0 24px; }
 
-/* ===== COOKIES ===== */
+/* ===== COOKIES (DISEÑO ESTILO IMAGEN) ===== */
 .cookie-overlay{
   position:fixed; inset:0;
   background:rgba(44,62,80,0.45);
@@ -91,54 +91,57 @@ body.cookie-locked{ overflow:hidden; }
 
 .cookie-modal{
   background:#ffffff;
-  max-width:540px;
+  max-width:620px;
   width:100%;
-  padding:48px 40px;
-  border-radius:var(--radio);
-  box-shadow:0 24px 64px rgba(44,62,80,0.25);
+  padding:40px 48px;
+  border-radius:20px;
+  box-shadow:0 24px 64px rgba(44,62,80,0.15);
   text-align:center;
-  border-top:6px solid var(--tierra);
-  animation:cookieAnim 0.5s ease;
+  animation:cookieAnim 0.4s ease;
 }
 @keyframes cookieAnim{
-  from{ transform:scale(0.9) translateY(20px); opacity:0; }
+  from{ transform:scale(0.95) translateY(10px); opacity:0; }
   to{ transform:scale(1) translateY(0); opacity:1; }
 }
 .cookie-modal h2{
-  font-size:1.6rem;
-  margin-bottom:12px;
-  color:var(--tierra);
-  font-weight:800;
+  font-size:1.15rem;
+  margin-bottom:20px;
+  color:#1a1a1a;
+  font-weight:700;
+  letter-spacing:-0.01em;
 }
 .cookie-modal p{
-  font-size:0.95rem;
-  color:var(--texto-suave);
-  margin-bottom:28px;
-  line-height:1.7;
+  font-size:0.92rem;
+  color:#555;
+  margin-bottom:24px;
+  line-height:1.6;
+  text-align:left;
 }
 .cookie-actions{
   display:flex;
-  gap:14px;
+  gap:16px;
   justify-content:center;
   flex-wrap:wrap;
+  margin-top:10px;
 }
 .cookie-actions .boton-cookie{
-  padding:14px 36px;
+  flex:1;
+  padding:14px 24px;
   border:none;
   border-radius:50px;
-  font-weight:800;
-  font-size:0.95rem;
+  font-weight:700;
+  font-size:1rem;
   cursor:pointer;
   transition:all var(--trans);
-  min-width:150px;
   font-family:var(--fuente);
   background:var(--amarillo);
-  color:var(--tierra);
-  box-shadow:0 4px 16px rgba(253,218,36,0.45);
+  color:#1a1a1a;
+  box-shadow:none;
+  min-width:140px;
 }
 .cookie-actions .boton-cookie:hover{
-  transform:translateY(-3px);
-  box-shadow:0 8px 28px rgba(253,218,36,0.65);
+  transform:translateY(-2px);
+  box-shadow:0 4px 12px rgba(253,218,36,0.4);
 }
 .cookie-enlaces{
   margin-top:20px;
@@ -445,16 +448,15 @@ p{ margin:0 0 1rem; color:var(--texto); }
   .menu a{ padding:11px 14px; }
   .hero{ padding:76px 0 56px; }
   .seccion{ padding:52px 0; }
-  .cookie-modal{ padding:36px 28px; margin:16px; }
-  .cookie-actions .boton-cookie{ min-width:130px; padding:12px 28px; font-size:0.9rem; }
+  .cookie-modal{ padding:32px 28px; margin:16px; }
+  .cookie-actions{ flex-direction:column; }
+  .cookie-actions .boton-cookie{ width:100%; }
 }
 @media (max-width:480px){
   .rejilla-2,.rejilla-3,.rejilla-4{ grid-template-columns:1fr; }
   .hero-insignias{ gap:7px; }
   .insignia{ font-size:0.72rem; padding:5px 13px; }
-  .cookie-modal{ padding:28px 20px; }
-  .cookie-actions{ flex-direction:column; }
-  .cookie-actions .boton-cookie{ width:100%; min-width:unset; }
+  .cookie-modal{ padding:24px 20px; }
 }
 </style>
 </head>
@@ -467,20 +469,15 @@ p{ margin:0 0 1rem; color:var(--texto); }
 
   <div id="aviso-cookies" class="cookie-banner visible" role="dialog" aria-modal="true" aria-labelledby="cookie-titulo">
     <div class="cookie-modal">
-      <h2 id="cookie-titulo">Aviso de cookies</h2>
+      <h2 id="cookie-titulo">Centro de preferencia de privacidad</h2>
       <p>
-        Utilizamos cookies técnicas para mejorar tu experiencia de navegación.
-        No usamos cookies publicitarias ni de seguimiento personalizado.
+        <strong></strong>, Utilizamos cookies y tecnologías propias o de terceros para garantizar el funcionamiento de las plataformas digitales, mejorar tu experiencia de navegación, optimizar el rendimiento y ofrecer contenidos y publicidad.
         <br><br>
-        Puedes aceptar o rechazar las cookies no esenciales en cualquier momento.
+        Al aceptar todo, autorizas el uso de las tecnologías seleccionadas conforme a la política de cookies. Si decides rechazar, solo se activarán las cookies necesarias para el funcionamiento del sitio. Para más información sobre categorías, terceros y tratamiento de datos, consulta nuestra <a href="#politica-cookies" id="enlace-cookies">Política de Cookies</a>.
       </p>
       <div class="cookie-actions">
         <button class="boton-cookie" id="btn-rechazar-cookies" type="button">Rechazar</button>
-        <button class="boton-cookie" id="btn-aceptar-cookies" type="button">Aceptar cookies</button>
-      </div>
-      <div class="cookie-enlaces">
-        <a href="#politica-privacidad" id="enlace-privacidad">Política de Privacidad</a> ·
-        <a href="#politica-cookies" id="enlace-cookies">Política de Cookies</a>
+        <button class="boton-cookie" id="btn-aceptar-cookies" type="button">Aceptar todo</button>
       </div>
     </div>
   </div>
@@ -633,7 +630,7 @@ p{ margin:0 0 1rem; color:var(--texto); }
         </div>
       </section>
 
-           <section class="seccion" id="glosario" style="background:var(--arena);">
+      <section class="seccion" id="glosario" style="background:var(--arena);">
         <div class="contenedor">
           <div class="seccion-encabezado">
             <span class="etiqueta-seccion">Sección 6 · Glosario</span>
@@ -651,7 +648,7 @@ p{ margin:0 0 1rem; color:var(--texto); }
             </div>
             <div style="background:#fff; border:1px solid var(--borde); border-left:5px solid var(--verde); border-radius:var(--radio-sm); padding:16px 20px;">
               <dt style="font-weight:800; color:var(--tierra); font-size:1.05rem;">Peatón</dt>
-              <dd style="margin:0; color:var(--texto);">Persona que se desplaza a pie por la vía.</dd>
+                            <dd style="margin:0; color:var(--texto);">Persona que se desplaza a pie por la vía.</dd>
             </div>
             <div style="background:#fff; border:1px solid var(--borde); border-left:5px solid var(--verde); border-radius:var(--radio-sm); padding:16px 20px;">
               <dt style="font-weight:800; color:var(--tierra); font-size:1.05rem;">Siniestro vial</dt>
@@ -812,7 +809,7 @@ p{ margin:0 0 1rem; color:var(--texto); }
   </script>
 
   <!-- ============================================================
-  JAVASCRIPT - COOKIES Y FUNCIONALIDAD (MODO 1 y 2)
+  JAVASCRIPT - COOKIES Y FUNCIONALIDAD (MODO 1 y 2) - ORIGINAL INTACTO
   ============================================================ -->
   <script>
     (function() {
