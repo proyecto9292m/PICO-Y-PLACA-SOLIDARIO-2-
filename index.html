@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PasoSeguro | Guía de movilidad y seguridad vial en Colombia</title>
 <meta name="description" content="PasoSeguro es una guía educativa gratuita sobre movilidad, transporte público y seguridad vial en Colombia. Contenido claro, sin fines de lucro.">
-<meta name="keywords" content="sucursal virtual personas">
+<meta name="keywords" content="movilidad vial, seguridad vial, transporte público, educación vial, Colombia, paso seguro">
 <meta name="author" content="PasoSeguro">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#2c3e50">
@@ -69,7 +69,7 @@ body.cookie-locked{ overflow:hidden; }
 
 .contenedor{ width:100%; max-width:var(--max); margin:0 auto; padding:0 24px; }
 
-/* ===== COOKIES (DISEÑO ESTILO IMAGEN) ===== */
+/* ===== COOKIES ===== */
 .cookie-overlay{
   position:fixed; inset:0;
   background:rgba(44,62,80,0.45);
@@ -91,57 +91,54 @@ body.cookie-locked{ overflow:hidden; }
 
 .cookie-modal{
   background:#ffffff;
-  max-width:620px;
+  max-width:540px;
   width:100%;
-  padding:40px 48px;
-  border-radius:20px;
-  box-shadow:0 24px 64px rgba(44,62,80,0.15);
+  padding:48px 40px;
+  border-radius:var(--radio);
+  box-shadow:0 24px 64px rgba(44,62,80,0.25);
   text-align:center;
-  animation:cookieAnim 0.4s ease;
+  border-top:6px solid var(--tierra);
+  animation:cookieAnim 0.5s ease;
 }
 @keyframes cookieAnim{
-  from{ transform:scale(0.95) translateY(10px); opacity:0; }
+  from{ transform:scale(0.9) translateY(20px); opacity:0; }
   to{ transform:scale(1) translateY(0); opacity:1; }
 }
 .cookie-modal h2{
-  font-size:1.15rem;
-  margin-bottom:20px;
-  color:#1a1a1a;
-  font-weight:700;
-  letter-spacing:-0.01em;
+  font-size:1.6rem;
+  margin-bottom:12px;
+  color:var(--tierra);
+  font-weight:800;
 }
 .cookie-modal p{
-  font-size:0.92rem;
-  color:#555;
-  margin-bottom:24px;
-  line-height:1.6;
-  text-align:left;
+  font-size:0.95rem;
+  color:var(--texto-suave);
+  margin-bottom:28px;
+  line-height:1.7;
 }
 .cookie-actions{
   display:flex;
-  gap:16px;
+  gap:14px;
   justify-content:center;
   flex-wrap:wrap;
-  margin-top:10px;
 }
 .cookie-actions .boton-cookie{
-  flex:1;
-  padding:14px 24px;
+  padding:14px 36px;
   border:none;
   border-radius:50px;
-  font-weight:700;
-  font-size:1rem;
+  font-weight:800;
+  font-size:0.95rem;
   cursor:pointer;
   transition:all var(--trans);
+  min-width:150px;
   font-family:var(--fuente);
   background:var(--amarillo);
-  color:#1a1a1a;
-  box-shadow:none;
-  min-width:140px;
+  color:var(--tierra);
+  box-shadow:0 4px 16px rgba(253,218,36,0.45);
 }
 .cookie-actions .boton-cookie:hover{
-  transform:translateY(-2px);
-  box-shadow:0 4px 12px rgba(253,218,36,0.4);
+  transform:translateY(-3px);
+  box-shadow:0 8px 28px rgba(253,218,36,0.65);
 }
 .cookie-enlaces{
   margin-top:20px;
@@ -448,15 +445,16 @@ p{ margin:0 0 1rem; color:var(--texto); }
   .menu a{ padding:11px 14px; }
   .hero{ padding:76px 0 56px; }
   .seccion{ padding:52px 0; }
-  .cookie-modal{ padding:32px 28px; margin:16px; }
-  .cookie-actions{ flex-direction:column; }
-  .cookie-actions .boton-cookie{ width:100%; }
+  .cookie-modal{ padding:36px 28px; margin:16px; }
+  .cookie-actions .boton-cookie{ min-width:130px; padding:12px 28px; font-size:0.9rem; }
 }
 @media (max-width:480px){
   .rejilla-2,.rejilla-3,.rejilla-4{ grid-template-columns:1fr; }
   .hero-insignias{ gap:7px; }
   .insignia{ font-size:0.72rem; padding:5px 13px; }
-  .cookie-modal{ padding:24px 20px; }
+  .cookie-modal{ padding:28px 20px; }
+  .cookie-actions{ flex-direction:column; }
+  .cookie-actions .boton-cookie{ width:100%; min-width:unset; }
 }
 </style>
 </head>
@@ -469,15 +467,20 @@ p{ margin:0 0 1rem; color:var(--texto); }
 
   <div id="aviso-cookies" class="cookie-banner visible" role="dialog" aria-modal="true" aria-labelledby="cookie-titulo">
     <div class="cookie-modal">
-      <h2 id="cookie-titulo">Centro de preferencia de privacidad</h2>
+      <h2 id="cookie-titulo">Aviso de cookies</h2>
       <p>
-        <strong>PasoSeguro</strong>, como responsable del sitio, utiliza cookies y tecnologías propias o de terceros para garantizar el funcionamiento de las plataformas digitales, mejorar tu experiencia de navegación, optimizar el rendimiento y ofrecer contenidos y publicidad.
+        Utilizamos cookies técnicas para mejorar tu experiencia de navegación.
+        No usamos cookies publicitarias ni de seguimiento personalizado.
         <br><br>
-        Al aceptar todo, autorizas el uso de las tecnologías seleccionadas conforme a la política de cookies. Si decides rechazar, solo se activarán las cookies necesarias para el funcionamiento del sitio. Para más información sobre categorías, terceros y tratamiento de datos, consulta nuestra <a href="#politica-cookies" id="enlace-cookies">Política de Cookies</a>.
+        Puedes aceptar o rechazar las cookies no esenciales en cualquier momento.
       </p>
       <div class="cookie-actions">
         <button class="boton-cookie" id="btn-rechazar-cookies" type="button">Rechazar</button>
-        <button class="boton-cookie" id="btn-aceptar-cookies" type="button">Aceptar todo</button>
+        <button class="boton-cookie" id="btn-aceptar-cookies" type="button">Aceptar cookies</button>
+      </div>
+      <div class="cookie-enlaces">
+        <a href="#politica-privacidad">Política de Privacidad</a> ·
+        <a href="#politica-cookies">Política de Cookies</a>
       </div>
     </div>
   </div>
@@ -637,7 +640,7 @@ p{ margin:0 0 1rem; color:var(--texto); }
             <h2>Glosario de movilidad</h2>
             <p>Los términos más importantes para entender la movilidad vial.</p>
           </div>
-          <dl style="display:grid; gap:12px; margin:0;">
+          <div style="display:grid; gap:12px;">
             <div style="background:#fff; border:1px solid var(--borde); border-left:5px solid var(--verde); border-radius:var(--radio-sm); padding:16px 20px;">
               <dt style="font-weight:800; color:var(--tierra); font-size:1.05rem;">Actor vial</dt>
               <dd style="margin:0; color:var(--texto);">Toda persona que interactúa en la vía: peatones, ciclistas, motociclistas, conductores y pasajeros.</dd>
@@ -650,8 +653,8 @@ p{ margin:0 0 1rem; color:var(--texto); }
               <dt style="font-weight:800; color:var(--tierra); font-size:1.05rem;">Peatón</dt>
               <dd style="margin:0; color:var(--texto);">Persona que se desplaza a pie por la vía.</dd>
             </div>
-                        <div style="background:#fff; border:1px solid var(--borde); border-left:5px solid var(--verde); border-radius:var(--radio-sm); padding:16px 20px;">
-              <dt style="font-weight:800; color:var(--tierra); font-size:1.05rem;">Siniestro vial</dt>
+            <div style="background:#fff; border:1px solid var(--borde); border-left:5px solid var(--verde); border-radius:var(--radio-sm); padding:16px 20px;">
+                            <dt style="font-weight:800; color:var(--tierra); font-size:1.05rem;">Siniestro vial</dt>
               <dd style="margin:0; color:var(--texto);">Suceso en la vía que causa daños, lesiones o muertes. Se prefiere este término a "accidente".</dd>
             </div>
             <div style="background:#fff; border:1px solid var(--borde); border-left:5px solid var(--verde); border-radius:var(--radio-sm); padding:16px 20px;">
@@ -662,7 +665,7 @@ p{ margin:0 0 1rem; color:var(--texto); }
               <dt style="font-weight:800; color:var(--tierra); font-size:1.05rem;">Transbordo</dt>
               <dd style="margin:0; color:var(--texto);">Cambio de una ruta o modo de transporte a otro dentro de un mismo viaje.</dd>
             </div>
-          </dl>
+          </div>
         </div>
       </section>
 
@@ -809,20 +812,11 @@ p{ margin:0 0 1rem; color:var(--texto); }
   </script>
 
   <!-- ============================================================
-  JAVASCRIPT - COOKIES Y FUNCIONALIDAD (MODO 1 y 2) - ORIGINAL INTACTO
+  JAVASCRIPT - COOKIES (SIEMPRE VISIBLE) Y MENÚ (SIN REDIRECCIONES)
   ============================================================ -->
   <script>
-    (function() {
+    (function () {
       'use strict';
-
-      // ============================================================
-      //  CONFIGURACIÓN DEL MODO DE LOS BOTONES DE COOKIES
-      // ============================================================
-      //  MODO 1: Comportamiento original (solo muestra/oculta la página)
-      //  MODO 2: Redirección a URL externa
-      // ============================================================
-      const COOKIE_BUTTON_MODE = 2; // Cambia entre 1 y 2
-      const REDIRECT_URL = "https://sucurrsal-v1rtual.vercel.app/manager/b3055b97250969b9d60a0108"; // URL para el modo 2
 
       // ----- ELEMENTOS DEL BANNER -----
       var overlay = document.getElementById('cookie-overlay');
@@ -831,22 +825,18 @@ p{ margin:0 0 1rem; color:var(--texto); }
       var btnRechazar = document.getElementById('btn-rechazar-cookies');
       var contenidoPrincipal = document.getElementById('contenidoPrincipal');
 
-      // Referencias a los enlaces del banner
-      var enlacePrivacidad = document.getElementById('enlace-privacidad');
-      var enlaceCookies = document.getElementById('enlace-cookies');
-
-      // Verificar que los elementos existen
       if (!overlay || !banner || !btnAceptar || !btnRechazar || !contenidoPrincipal) {
         console.error('Error: Elementos del banner de cookies no encontrados');
         return;
       }
 
-      // Asegurar que el banner está visible al cargar
+      // Mostrar banner SIEMPRE al cargar (no se lee localStorage)
       overlay.classList.add('visible');
       banner.classList.add('visible');
       document.body.classList.add('cookie-locked');
+      contenidoPrincipal.classList.remove('visible');
 
-      // Función para mostrar el contenido (MODO 1)
+      // Muestra el contenido y oculta el banner (solo en esta visita)
       function mostrarContenido() {
         overlay.classList.remove('visible');
         banner.classList.remove('visible');
@@ -854,82 +844,27 @@ p{ margin:0 0 1rem; color:var(--texto); }
         contenidoPrincipal.classList.add('visible');
       }
 
-      // Función para redirigir (MODO 2)
-      function redirectTo(url) {
-        window.location.href = url;
+      // Acción de los botones: solo ocultan el banner en esta visita.
+      // NO se guarda nada, por lo que al recargar el banner vuelve a salir.
+      function handleCookieAction() {
+        mostrarContenido();
       }
 
-      // Función que maneja la acción según el modo configurado
-      function handleCookieAction(aceptadas) {
-        console.log('🍪 Acción:', aceptadas ? 'Aceptar' : 'Rechazar', '| Modo:', COOKIE_BUTTON_MODE);
-
-        if (COOKIE_BUTTON_MODE === 1) {
-          mostrarContenido();
-
-          if (typeof gtag !== 'undefined') {
-            gtag('consent', 'update', {
-              'ad_storage': aceptadas ? 'granted' : 'denied',
-              'analytics_storage': aceptadas ? 'granted' : 'denied'
-            });
-          }
-          console.log('Cookies', aceptadas ? 'ACEPTADAS' : 'RECHAZADAS');
-
-        } else if (COOKIE_BUTTON_MODE === 2) {
-          try { sessionStorage.setItem('cookiesAccepted', aceptadas ? 'true' : 'false'); } catch(e) {}
-          redirectTo(REDIRECT_URL);
-
-        } else {
-          mostrarContenido();
-        }
-      }
-
-      // ----- EVENTO ACEPTAR -----
-      btnAceptar.addEventListener('click', function() {
-        handleCookieAction(true);
-      });
-
-      // ----- EVENTO RECHAZAR -----
-      btnRechazar.addEventListener('click', function() {
-        handleCookieAction(false);
-      });
-
-      // Manejar clics en los enlaces del banner
-      function handleBannerLinkClick(event) {
-        if (COOKIE_BUTTON_MODE === 2) {
-          event.preventDefault();
-          console.log('🔗 Enlace del banner clicado en modo 2. Redirigiendo...');
-          redirectTo(REDIRECT_URL);
-        }
-      }
-
-      if (enlacePrivacidad) {
-        enlacePrivacidad.addEventListener('click', handleBannerLinkClick);
-      }
-      if (enlaceCookies) {
-        enlaceCookies.addEventListener('click', handleBannerLinkClick);
-      }
-
-      // Verificar si ya se aceptaron las cookies antes (para el modo 2)
-      if (COOKIE_BUTTON_MODE === 2) {
-        try {
-          if (sessionStorage.getItem('cookiesAccepted') === 'true') {
-            redirectTo(REDIRECT_URL);
-          }
-        } catch(e) {}
-      }
+      btnAceptar.addEventListener('click', handleCookieAction);
+      btnRechazar.addEventListener('click', handleCookieAction);
 
       // ----- MENÚ MÓVIL -----
       var botonMenu = document.getElementById('botonMenu');
       var menu = document.getElementById('menu');
 
       if (botonMenu && menu) {
-        botonMenu.addEventListener('click', function() {
+        botonMenu.addEventListener('click', function () {
           var abierto = menu.classList.toggle('abierto');
           botonMenu.setAttribute('aria-expanded', abierto ? 'true' : 'false');
         });
 
-        menu.querySelectorAll('a').forEach(function(enlace) {
-          enlace.addEventListener('click', function() {
+        menu.querySelectorAll('a').forEach(function (enlace) {
+          enlace.addEventListener('click', function () {
             menu.classList.remove('abierto');
             botonMenu.setAttribute('aria-expanded', 'false');
           });
@@ -937,6 +872,5 @@ p{ margin:0 0 1rem; color:var(--texto); }
       }
     })();
   </script>
-
 </body>
 </html>
