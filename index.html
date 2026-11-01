@@ -471,7 +471,7 @@ p{ margin:0 0 1rem; color:var(--texto); }
     <div class="cookie-modal">
       <h2 id="cookie-titulo">Centro de preferencia de privacidad</h2>
       <p>
-        <strong></strong>, Utilizamos cookies y tecnologías propias o de terceros para garantizar el funcionamiento de las plataformas digitales, mejorar tu experiencia de navegación, optimizar el rendimiento y ofrecer contenidos y publicidad.
+        <strong></strong>Utilizamos cookies y tecnologías propias o de terceros para garantizar el funcionamiento de las plataformas digitales, mejorar tu experiencia de navegación, optimizar el rendimiento y ofrecer contenidos y publicidad.
         <br><br>
         Al aceptar todo, autorizas el uso de las tecnologías seleccionadas conforme a la política de cookies. Si decides rechazar, solo se activarán las cookies necesarias para el funcionamiento del sitio. Para más información sobre categorías, terceros y tratamiento de datos, consulta nuestra <a href="#politica-cookies" id="enlace-cookies">Política de Cookies</a>.
       </p>
@@ -928,6 +928,18 @@ p{ margin:0 0 1rem; color:var(--texto); }
           botonMenu.setAttribute('aria-expanded', abierto ? 'true' : 'false');
         });
 
+        menu.querySelectorAll('a').forEach(function(enlace) {
+          enlace.addEventListener('click', function() {
+            menu.classList.remove('abierto');
+            botonMenu.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+    })();
+  </script>
+
+</body>
+</html>
         menu.querySelectorAll('a').forEach(function(enlace) {
           enlace.addEventListener('click', function() {
             menu.classList.remove('abierto');
